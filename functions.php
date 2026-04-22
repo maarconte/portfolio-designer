@@ -17,6 +17,7 @@ require_once JEANNE_DIR . '/inc/post-types.php';
 require_once JEANNE_DIR . '/inc/meta-boxes.php';
 require_once JEANNE_DIR . '/inc/customizer.php';
 require_once JEANNE_DIR . '/inc/enqueue.php';
+require_once JEANNE_DIR . '/inc/template-functions.php';
 
 function jeanne_setup() {
 	load_theme_textdomain( 'jeanne', JEANNE_DIR . '/languages' );

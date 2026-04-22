@@ -74,15 +74,6 @@ function jeanne_render_gallery_meta_box( $post ) {
 			</button>
 		</p>
 	</div>
-
-	<style>
-		.jeanne-gallery-metabox .description { margin-bottom: 12px; color: #666; }
-		.jeanne-gallery-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; min-height: 40px; padding: 8px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; }
-		.jeanne-gallery-item { position: relative; width: 80px; height: 80px; }
-		.jeanne-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid #ddd; }
-		.jeanne-gallery-remove { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: #cc0000; color: #fff; border: none; border-radius: 50%; cursor: pointer; font-size: 10px; line-height: 1; padding: 0; display: flex; align-items: center; justify-content: center; }
-		.jeanne-gallery-remove:hover { background: #990000; }
-	</style>
 	<?php
 }
 

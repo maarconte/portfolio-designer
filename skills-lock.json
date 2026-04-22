@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "wordpress-pro": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "5c1c5d5704d071543469604773df0f56df33b729221c42899f92fee1f846ea15"
+    },
+    "wordpress-themes": {
+      "source": "oiler/claude-skills",
+      "sourceType": "github",
+      "computedHash": "99a9c2d1f0ea616b39a5cb2fb8669b46e4f800caec21ddbf3faf5f8471f06d1a"
+    }
+  }
+}

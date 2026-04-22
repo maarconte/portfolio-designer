@@ -60,6 +60,7 @@
 		current: 0,
 		autoPlayTimer: null,
 		isWrapping: false,
+		_cardStep: 0,
 
 		init: function () {
 			this.el    = document.getElementById('project-slider');
@@ -82,6 +83,7 @@
 			// Window resize: recalculate offset
 			var self = this;
 			window.addEventListener('resize', function () {
+				self._cardStep = 0; // Invalidate cache
 				self.goTo(self.current, true);
 			});
 		},
@@ -182,11 +184,14 @@
 		},
 
 		_getCardStep: function () {
+			if (this._cardStep) return this._cardStep;
 			if (!this.cards.length) return 0;
+
 			var card  = this.cards[0];
 			var style = window.getComputedStyle(this.track);
 			var gap   = parseFloat(style.gap) || parseFloat(style.columnGap) || 0;
-			return card.offsetWidth + gap;
+			this._cardStep = card.offsetWidth + gap;
+			return this._cardStep;
 		},
 
 		goTo: function (index, instant) {
@@ -304,23 +309,20 @@
 		},
 
 		open: function (card) {
-			var galleryRaw  = card.dataset.gallery      || '[]';
-			var title       = card.dataset.title        || '';
-			var description = card.dataset.description  || '';
-			var year        = card.dataset.year         || '';
-			var client      = card.dataset.client       || '';
-			var category    = card.dataset.category     || '';
+			var projectId = card.dataset.projectId;
+			var data      = (typeof jeanneProjects !== 'undefined') ? jeanneProjects[projectId] : null;
 
-			try {
-				this.images = JSON.parse(galleryRaw);
-			} catch (e) {
-				this.images = [];
+			if (!data) {
+				console.error('Project data not found for ID:', projectId);
+				return;
 			}
 
-			if (!this.images.length) {
-				var img = card.querySelector('.project-card__image img');
-				if (img) this.images = [{ url: img.src, alt: img.alt }];
-			}
+			this.images      = data.gallery || [];
+			var title        = data.title || '';
+			var description  = data.description || '';
+			var year         = data.year || '';
+			var client       = data.client || '';
+			var category     = data.category || '';
 
 			if (this.titleEl) this.titleEl.textContent = title;
 
@@ -369,14 +371,16 @@
 		// Build the gallery as a horizontal slider
 		_renderImages: function () {
 			if (!this.imageContainer) return;
-			this.imageContainer.innerHTML = '';
+			
 			this._galleryIndex = 0;
-			this._galleryTrack = null;
-			this._galleryCounter = null;
-
-			if (!this.images.length) return;
+			
+			if (!this.images.length) {
+				this.imageContainer.innerHTML = '';
+				return;
+			}
 
 			var self = this;
+			var fragment = document.createDocumentFragment();
 
 			// Outer slider wrapper
 			var sliderEl = document.createElement('div');
@@ -415,19 +419,23 @@
 				sliderEl.appendChild(nextZone);
 			}
 
-			this.imageContainer.appendChild(sliderEl);
+			fragment.appendChild(sliderEl);
 
 			// Counter
 			if (this.images.length > 1) {
 				var counter = document.createElement('p');
 				counter.className = 'drawer__gallery-counter';
 				this._galleryCounter = counter;
-				this.imageContainer.appendChild(counter);
+				fragment.appendChild(counter);
 				this._galleryUpdateCounter();
 			}
 
 			// Touch swipe
 			this._setupGalleryTouch(sliderEl);
+
+			// Single DOM update
+			this.imageContainer.innerHTML = '';
+			this.imageContainer.appendChild(fragment);
 		},
 
 		_galleryGoTo: function (index) {

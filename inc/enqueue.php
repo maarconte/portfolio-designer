@@ -57,6 +57,13 @@ function jeanne_enqueue_admin_assets( $hook ) {
 
 	wp_enqueue_media();
 
+	wp_enqueue_style(
+		'jeanne-admin',
+		JEANNE_URI . '/assets/css/admin.css',
+		array(),
+		JEANNE_VERSION
+	);
+
 	wp_enqueue_script(
 		'jeanne-admin-gallery',
 		JEANNE_URI . '/assets/js/admin-gallery.js',
