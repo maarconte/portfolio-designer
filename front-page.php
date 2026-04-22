@@ -44,7 +44,7 @@ get_header();
 						tabindex="0"
 						aria-label="<?php echo esc_attr(sprintf(__('View project: %s', 'jeanne'), $project_data['title'])); ?>"
 						data-project-id="<?php echo esc_attr($project_data['id']); ?>">
-						
+
 						<div class="project-card__image">
 							<?php if ($card_thumb) : ?>
 								<img

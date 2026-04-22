@@ -126,7 +126,7 @@ a:focus-visible,
 	display: flex;
 	gap: 1.5rem;
 	align-items: center;
-	/* justify-content: space-between; */
+	justify-content: space-between;
 	padding: 0 3rem;
 	pointer-events: auto;
 }
@@ -173,6 +173,7 @@ a:focus-visible,
 /* ─── Front Page / Slider ────────────────────────────────────────────────────── */
 .site-main--home {
 	height: 100vh;
+	padding-top: var(--header-height);
 	overflow: hidden;
 	position: relative;
 	display: flex;
@@ -191,7 +192,6 @@ a:focus-visible,
 	display: flex;
 	height: 100%;
 	align-items: center;
-	padding: 0 var(--card-gap);
 	transition: transform 0.75s var(--ease-slide), opacity 0.3s var(--ease-fade);
 	will-change: transform;
 }
@@ -233,6 +233,7 @@ a:focus-visible,
 .project-card__info {
 	flex: 0 0 auto;
 	padding-top: 1.25rem;
+	padding-left: 1.25rem;
 }
 
 .project-card__title {
