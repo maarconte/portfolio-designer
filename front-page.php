@@ -141,7 +141,7 @@ get_header();
 	<?php endif; ?>
 </main>
 
-<!-- Project Modal / Lightbox -->
+<!-- Project Drawer -->
 <div
 	class="project-modal"
 	id="project-modal"
@@ -149,33 +149,28 @@ get_header();
 	aria-modal="true"
 	aria-labelledby="modal-title"
 	hidden>
+
 	<div class="modal__overlay" id="modal-overlay"></div>
 
-	<div class="modal__content">
+	<div class="drawer__panel">
 
-		<button class="modal__close" id="modal-close" aria-label="<?php esc_attr_e('Close project', 'jeanne'); ?>">
-			<span aria-hidden="true">&#x2715;</span>
-		</button>
-
-		<div class="modal__gallery-wrap">
-			<div class="modal__image-container" id="modal-image-container"></div>
-
-			<button class="modal__nav-btn modal__nav-prev" id="modal-prev" aria-label="<?php esc_attr_e('Previous image', 'jeanne'); ?>">
-				<span aria-hidden="true">&#8592;</span>
+		<header class="drawer__header">
+			<div>
+				<h2 class="modal__title" id="modal-title"></h2>
+				<p class="modal__meta" id="modal-meta"></p>
+			</div>
+			<button class="modal__close" id="modal-close" aria-label="<?php esc_attr_e('Fermer', 'jeanne'); ?>">
+				&#x2715;
 			</button>
-			<button class="modal__nav-btn modal__nav-next" id="modal-next" aria-label="<?php esc_attr_e('Next image', 'jeanne'); ?>">
-				<span aria-hidden="true">&#8594;</span>
-			</button>
-		</div>
+		</header>
 
-		<div class="modal__info">
-			<h2 class="modal__title" id="modal-title"></h2>
-			<p class="modal__meta" id="modal-meta"></p>
+		<div class="drawer__body">
 			<p class="modal__description" id="modal-description"></p>
-			<p class="modal__counter" id="modal-counter"></p>
+			<div class="drawer__gallery" id="modal-image-container"></div>
 		</div>
 
 	</div>
+
 </div><!-- .project-modal -->
 
 <!-- Custom cursor element -->

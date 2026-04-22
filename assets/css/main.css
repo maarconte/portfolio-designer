@@ -324,14 +324,14 @@ a:focus-visible,
 
 .custom-cursor__arrow {
 	display: none;
-	font-size: 1.25rem;
+	font-size: 3rem;
 	line-height: 1;
 	color: var(--color-black);
 }
 
 .custom-cursor__text {
 	display: none;
-	font-size: 0.625rem;
+	font-size: 1rem;
 	letter-spacing: 0.22em;
 	text-transform: uppercase;
 	color: var(--color-white);
@@ -349,60 +349,94 @@ a:focus-visible,
 	display: block;
 }
 
-/* ─── Project Modal ──────────────────────────────────────────────────────────── */
+/* ─── Project Drawer ─────────────────────────────────────────────────────────── */
 .project-modal {
 	position: fixed;
 	inset: 0;
 	z-index: var(--modal-z);
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	opacity: 0;
+	justify-content: flex-end;
+	pointer-events: none;
 	visibility: hidden;
-	transition: opacity 0.35s var(--ease-fade), visibility 0.35s var(--ease-fade);
+	transition: visibility 0s linear 0.5s;
 }
 
-.project-modal.is-open {
-	opacity: 1;
-	visibility: visible;
-}
-
-/* Hidden attribute state — JS adds/removes .is-open, not [hidden] */
 .project-modal[hidden] {
 	display: flex;
 }
 
+.project-modal.is-open {
+	pointer-events: auto;
+	visibility: visible;
+	transition-delay: 0s;
+}
+
+/* Dim overlay */
 .modal__overlay {
 	position: absolute;
 	inset: 0;
-	background: var(--color-black);
-	z-index: 0;
-	opacity: .8;
+	background: rgba(0, 0, 0, 0.25);
+	opacity: 0;
+	transition: opacity 0.45s var(--ease-fade);
+	cursor: default;
 }
 
-.modal__content {
+.project-modal.is-open .modal__overlay {
+	opacity: 1;
+}
+
+/* Drawer panel */
+.drawer__panel {
 	position: relative;
 	z-index: 1;
-	width: 100%;
+	width: 55vw;
 	height: 100%;
+	background: var(--color-white);
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	transform: translateX(100%);
+	transition: transform 0.5s var(--ease-slide);
+	overflow: hidden;
+}
+
+.project-modal.is-open .drawer__panel {
+	transform: translateX(0);
+}
+
+/* Drawer header */
+.drawer__header {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 2rem 3rem;
+	border-bottom: 1px solid var(--color-line);
+}
+
+.modal__title {
+	font-size: 1rem;
+	letter-spacing: 0.06em;
+	font-weight: 400;
+	line-height: 1.4;
+	color: var(--color-black);
+}
+
+.modal__meta {
+	font-size: 0.625rem;
+	letter-spacing: 0.1em;
+	color: var(--color-mid);
+	margin-top: 0.3rem;
 }
 
 /* Close button */
 .modal__close {
-	position: absolute;
-	top: 1.75rem;
-	right: 2rem;
-	color: var(--color-white);
-	font-size: 1.25rem;
+	flex: 0 0 auto;
+	margin-left: 2rem;
+	font-size: 1rem;
 	line-height: 1;
-	padding: 0.5rem;
-	z-index: 10;
-	opacity: 0.5;
+	padding: 0.25rem;
+	color: var(--color-black);
+	opacity: 0.4;
 	transition: opacity 0.2s;
 }
 
@@ -410,111 +444,66 @@ a:focus-visible,
 	opacity: 1;
 }
 
-/* Gallery wrap */
-.modal__gallery-wrap {
-	position: relative;
-	width: 100%;
+/* Drawer scrollable body */
+.drawer__body {
 	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	padding: 2.5rem 3rem 4rem;
 }
 
-.modal__image-container {
-	position: relative;
-	max-width: 82vw;
-	max-height: 72vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.modal__image {
-	max-width: 82vw;
-	max-height: 72vh;
-	width: auto;
-	height: auto;
-	object-fit: contain;
-	display: none;
-	opacity: 0;
-	transition: opacity 0.3s var(--ease-fade);
-}
-
-.modal__image.is-active {
-	display: block;
-	opacity: 1;
-}
-
-/* Modal nav buttons */
-.modal__nav-btn {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	color: var(--color-white);
-	font-size: 1.25rem;
-	padding: 1.5rem 2rem;
-	z-index: 5;
-	opacity: 0.25;
-	transition: opacity 0.2s;
-	line-height: 1;
-}
-
-.modal__nav-btn:hover {
-	opacity: 1;
-}
-
-.modal__nav-prev { left: 0.5rem; }
-.modal__nav-next { right: 0.5rem; }
-
-/* Modal info strip */
-.modal__info {
-	flex: 0 0 auto;
-	padding: 2rem 3rem;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	align-items: start;
-	gap: 0.5rem 3rem;
-	color: var(--color-white);
-	width: 100%;
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal__title {
-	font-size: 0.6875rem;
-	letter-spacing: 0.2em;
-	text-transform: uppercase;
-	font-weight: 400;
-	grid-column: 1;
-	grid-row: 1;
-}
-
-.modal__meta {
-	font-size: 0.575rem;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.35);
-	grid-column: 1;
-	grid-row: 2;
-}
-
-.modal__counter {
-	font-size: 0.575rem;
-	letter-spacing: 0.14em;
-	color: rgba(255, 255, 255, 0.25);
-	grid-column: 1;
-	grid-row: 3;
-}
-
+/* Description */
 .modal__description {
-	font-size: 0.8125rem;
+	font-size: 0.875rem;
+	line-height: 1.8;
 	letter-spacing: 0.01em;
-	color: rgba(255, 255, 255, 0.65);
-	line-height: 1.75;
-	white-space: pre-line;    /* préserve les sauts de ligne du contenu WP */
-	grid-column: 2;
-	grid-row: 1 / span 3;
-	align-self: start;
+	white-space: pre-line;
+	color: var(--color-black);
+}
+
+/* Gallery slider inside the drawer */
+.drawer__gallery-slider {
+	position: relative;
+	margin-top: 3rem;
+	overflow: hidden;
+	cursor: none;
+}
+
+.drawer__gallery {
+	display: flex;
+	transition: transform 0.65s var(--ease-slide);
+	will-change: transform;
+}
+
+.drawer__gallery img {
+	flex: 0 0 100%;
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Nav zones — même principe que le slider principal */
+.drawer__gallery-nav {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	z-index: 5;
+	cursor: none;
+}
+
+.drawer__gallery-nav--prev { left: 0; }
+.drawer__gallery-nav--next { right: 0; }
+
+/* Counter sous le slider */
+.drawer__gallery-counter {
+	margin-top:3rem;
+	font-size: 1rem;
+	letter-spacing: 0.14em;
+	color: var(--color-black);
+	text-align: left;
+	padding: 0 1rem ;
+	text-align: center;
 }
 
 /* ─── Single Project Page ─────────────────────────────────────────────────────── */
@@ -791,36 +780,14 @@ a:focus-visible,
 	.site-header__inner { padding: 0 1.5rem; }
 
 
-	.modal__image {
-		max-width: 95vw;
-		max-height: 60vh;
+	.drawer__panel {
+		width: 100vw;
 	}
 
-	.modal__gallery-wrap { padding: 0 0.5rem; }
-
-	.modal__nav-btn {
-		padding: 1rem;
-		font-size: 1rem;
-	}
-
-	.modal__info {
-		grid-template-columns: 1fr;
-		padding: 1.25rem 1.5rem;
-		gap: 0.35rem;
-	}
-
-	.modal__title,
-	.modal__meta,
-	.modal__counter,
-	.modal__description {
-		grid-column: 1;
-		grid-row: auto;
-	}
-
-	.modal__description {
-		margin-top: 0.75rem;
-		padding-top: 0.75rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	.drawer__header,
+	.drawer__body {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 	}
 
 	.container { padding: 0 1.5rem; }

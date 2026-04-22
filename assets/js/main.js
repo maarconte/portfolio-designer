@@ -253,10 +253,11 @@
 		titleEl: null,
 		metaEl: null,
 		descEl: null,
-		counterEl: null,
 		images: [],
-		currentImage: 0,
 		_open: false,
+		_galleryIndex: 0,
+		_galleryTrack: null,
+		_galleryCounter: null,
 
 		init: function () {
 			this.el             = document.getElementById('project-modal');
@@ -264,34 +265,19 @@
 			this.titleEl        = document.getElementById('modal-title');
 			this.metaEl         = document.getElementById('modal-meta');
 			this.descEl         = document.getElementById('modal-description');
-			this.counterEl      = document.getElementById('modal-counter');
 
 			if (!this.el) return;
 
-			// Remove [hidden] so CSS controls visibility
 			this.el.removeAttribute('hidden');
 
-			// Close button
 			var closeBtn = document.getElementById('modal-close');
 			if (closeBtn) closeBtn.addEventListener('click', this.close.bind(this));
 
-			// Overlay click
 			var overlay = document.getElementById('modal-overlay');
 			if (overlay) overlay.addEventListener('click', this.close.bind(this));
 
-			// Navigation
-			var prevBtn = document.getElementById('modal-prev');
-			var nextBtn = document.getElementById('modal-next');
-			if (prevBtn) prevBtn.addEventListener('click', this.prevImage.bind(this));
-			if (nextBtn) nextBtn.addEventListener('click', this.nextImage.bind(this));
-
-			// Keyboard
 			document.addEventListener('keydown', this._onKeydown.bind(this));
 
-			// Touch swipe inside modal
-			this._setupModalTouch();
-
-			// Project card click handlers
 			this._bindCards();
 		},
 
@@ -300,12 +286,8 @@
 			var self  = this;
 
 			cards.forEach(function (card) {
-				// Click to open modal
-				card.addEventListener('click', function () {
-					self.open(card);
-				});
+				card.addEventListener('click', function () { self.open(card); });
 
-				// Keyboard: Enter / Space opens modal
 				card.addEventListener('keydown', function (e) {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
@@ -313,7 +295,6 @@
 					}
 				});
 
-				// Custom cursor: "More" on image hover
 				var imgEl = card.querySelector('.project-card__image');
 				if (imgEl && !isTouch) {
 					imgEl.addEventListener('mouseenter', function () { Cursor.setState('more'); });
@@ -323,12 +304,12 @@
 		},
 
 		open: function (card) {
-			var galleryRaw   = card.dataset.gallery  || '[]';
-			var title        = card.dataset.title    || '';
-			var description  = card.dataset.description || '';
-			var year         = card.dataset.year     || '';
-			var client       = card.dataset.client   || '';
-			var category     = card.dataset.category || '';
+			var galleryRaw  = card.dataset.gallery      || '[]';
+			var title       = card.dataset.title        || '';
+			var description = card.dataset.description  || '';
+			var year        = card.dataset.year         || '';
+			var client      = card.dataset.client       || '';
+			var category    = card.dataset.category     || '';
 
 			try {
 				this.images = JSON.parse(galleryRaw);
@@ -336,39 +317,35 @@
 				this.images = [];
 			}
 
-			// Fallback to the card thumbnail
 			if (!this.images.length) {
 				var img = card.querySelector('.project-card__image img');
-				if (img) {
-					this.images = [{ url: img.src, alt: img.alt, thumb: img.src }];
-				}
+				if (img) this.images = [{ url: img.src, alt: img.alt }];
 			}
 
-			// Populate info
 			if (this.titleEl) this.titleEl.textContent = title;
 
 			if (this.metaEl) {
 				var metaParts = [category, client, year].filter(Boolean);
-				this.metaEl.textContent = metaParts.join('\u2002\u2022\u2002');
+				this.metaEl.textContent   = metaParts.join('\u2002\u2022\u2002');
 				this.metaEl.style.display = metaParts.length ? '' : 'none';
 			}
 
 			if (this.descEl) {
-				this.descEl.textContent    = description;
-				this.descEl.style.display  = description ? '' : 'none';
+				this.descEl.textContent   = description;
+				this.descEl.style.display = description ? '' : 'none';
 			}
 
-			this.currentImage = 0;
 			this._renderImages();
-			this._updateCounter();
-			this._updateNavVisibility();
+
+			// Reset scroll to top
+			var body = this.el.querySelector('.drawer__body');
+			if (body) body.scrollTop = 0;
 
 			this.el.classList.add('is-open');
 			this._open = true;
 			document.body.classList.add('modal-open');
 			Slider.pauseAutoPlay();
 
-			// Focus management
 			var closeBtn = document.getElementById('modal-close');
 			if (closeBtn) closeBtn.focus();
 		},
@@ -382,92 +359,118 @@
 			var self = this;
 			setTimeout(function () {
 				if (self.imageContainer) self.imageContainer.innerHTML = '';
-			}, 360);
+			}, 520);
 		},
 
 		isOpen: function () {
 			return this._open;
 		},
 
+		// Build the gallery as a horizontal slider
 		_renderImages: function () {
 			if (!this.imageContainer) return;
 			this.imageContainer.innerHTML = '';
+			this._galleryIndex = 0;
+			this._galleryTrack = null;
+			this._galleryCounter = null;
+
+			if (!this.images.length) return;
 
 			var self = this;
-			this.images.forEach(function (imgData, i) {
-				var el    = document.createElement('img');
-				el.src    = imgData.url;
-				el.alt    = imgData.alt || '';
-				el.className = 'modal__image' + (i === 0 ? ' is-active' : '');
-				self.imageContainer.appendChild(el);
+
+			// Outer slider wrapper
+			var sliderEl = document.createElement('div');
+			sliderEl.className = 'drawer__gallery-slider';
+
+			// Track
+			var track = document.createElement('div');
+			track.className = 'drawer__gallery';
+			this._galleryTrack = track;
+
+			this.images.forEach(function (imgData) {
+				var el     = document.createElement('img');
+				el.src     = imgData.url;
+				el.alt     = imgData.alt || '';
+				el.loading = 'lazy';
+				track.appendChild(el);
 			});
-		},
 
-		_showImage: function (index) {
-			var imgs = this.imageContainer.querySelectorAll('.modal__image');
-			imgs.forEach(function (img, i) {
-				img.classList.toggle('is-active', i === index);
-			});
-			this.currentImage = index;
-			this._updateCounter();
-		},
+			sliderEl.appendChild(track);
 
-		nextImage: function () {
-			var next = (this.currentImage + 1) % this.images.length;
-			this._showImage(next);
-		},
-
-		prevImage: function () {
-			var prev = (this.currentImage - 1 + this.images.length) % this.images.length;
-			this._showImage(prev);
-		},
-
-		_updateCounter: function () {
-			if (!this.counterEl) return;
+			// Nav zones (only if more than one image)
 			if (this.images.length > 1) {
-				this.counterEl.textContent    = (this.currentImage + 1) + ' \u2014 ' + this.images.length;
-				this.counterEl.style.display  = '';
-			} else {
-				this.counterEl.style.display  = 'none';
+				var prevZone = document.createElement('div');
+				prevZone.className = 'drawer__gallery-nav drawer__gallery-nav--prev';
+				prevZone.addEventListener('click', function () { self._galleryPrev(); });
+				prevZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-left'); });
+				prevZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
+
+				var nextZone = document.createElement('div');
+				nextZone.className = 'drawer__gallery-nav drawer__gallery-nav--next';
+				nextZone.addEventListener('click', function () { self._galleryNext(); });
+				nextZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-right'); });
+				nextZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
+
+				sliderEl.appendChild(prevZone);
+				sliderEl.appendChild(nextZone);
+			}
+
+			this.imageContainer.appendChild(sliderEl);
+
+			// Counter
+			if (this.images.length > 1) {
+				var counter = document.createElement('p');
+				counter.className = 'drawer__gallery-counter';
+				this._galleryCounter = counter;
+				this.imageContainer.appendChild(counter);
+				this._galleryUpdateCounter();
+			}
+
+			// Touch swipe
+			this._setupGalleryTouch(sliderEl);
+		},
+
+		_galleryGoTo: function (index) {
+			var total = this.images.length;
+			this._galleryIndex = ((index % total) + total) % total;
+			if (this._galleryTrack) {
+				this._galleryTrack.style.transform = 'translateX(-' + (this._galleryIndex * 100) + '%)';
+			}
+			this._galleryUpdateCounter();
+		},
+
+		_galleryNext: function () { this._galleryGoTo(this._galleryIndex + 1); },
+		_galleryPrev: function () { this._galleryGoTo(this._galleryIndex - 1); },
+
+		_galleryUpdateCounter: function () {
+			if (this._galleryCounter) {
+				this._galleryCounter.textContent = (this._galleryIndex + 1) + ' \u2014 ' + this.images.length;
 			}
 		},
 
-		_updateNavVisibility: function () {
-			var show    = this.images.length > 1;
-			var prevBtn = document.getElementById('modal-prev');
-			var nextBtn = document.getElementById('modal-next');
-			if (prevBtn) prevBtn.style.display = show ? '' : 'none';
-			if (nextBtn) nextBtn.style.display = show ? '' : 'none';
+		_setupGalleryTouch: function (el) {
+			var startX = 0;
+			var self   = this;
+			el.addEventListener('touchstart', function (e) {
+				startX = e.touches[0].clientX;
+			}, { passive: true });
+			el.addEventListener('touchend', function (e) {
+				var diff = startX - e.changedTouches[0].clientX;
+				if (Math.abs(diff) > 45) {
+					diff > 0 ? self._galleryNext() : self._galleryPrev();
+				}
+			}, { passive: true });
 		},
 
 		_onKeydown: function (e) {
 			if (!this._open) return;
-			switch (e.key) {
-				case 'Escape':     this.close();      break;
-				case 'ArrowLeft':  this.prevImage();  break;
-				case 'ArrowRight': this.nextImage();  break;
-			}
+			if (e.key === 'Escape')      this.close();
+			if (e.key === 'ArrowLeft')   this._galleryPrev();
+			if (e.key === 'ArrowRight')  this._galleryNext();
 		},
 
 		_setupModalTouch: function () {
-			if (!this.el) return;
-			var startX = 0;
-			var self   = this;
-
-			this.el.addEventListener('touchstart', function (e) {
-				startX = e.touches[0].clientX;
-			}, { passive: true });
-
-			this.el.addEventListener('touchend', function (e) {
-				var diff = startX - e.changedTouches[0].clientX;
-				if (Math.abs(diff) > 45) {
-					if (diff > 0) {
-						self.nextImage();
-					} else {
-						self.prevImage();
-					}
-				}
-			}, { passive: true });
+			// Touch géré par _setupGalleryTouch sur le slider.
 		}
 	};
 
