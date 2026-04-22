@@ -5,7 +5,8 @@
 (function () {
 	'use strict';
 
-	var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+	/* (hover: hover) and (pointer: fine) = vrai souris/trackpad précis ; faux sur écran tactile */
+	var isTouch = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 	/* ==========================================================================
 	   CUSTOM CURSOR

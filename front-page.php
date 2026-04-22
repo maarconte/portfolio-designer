@@ -31,7 +31,7 @@ get_header();
 					<?php
 					$post_id     = get_the_ID();
 					$title       = get_the_title();
-					$description = get_the_excerpt() ?: wp_trim_words(get_the_content(), 30);
+					$description = wp_strip_all_tags(get_the_content());
 					$permalink   = get_permalink();
 					$year        = get_post_meta($post_id, '_jeanne_year', true);
 					$client      = get_post_meta($post_id, '_jeanne_client', true);

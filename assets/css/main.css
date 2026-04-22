@@ -470,10 +470,14 @@ a:focus-visible,
 /* Modal info strip */
 .modal__info {
 	flex: 0 0 auto;
-	padding: 1.5rem 2rem;
-	text-align: center;
+	padding: 2rem 3rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: start;
+	gap: 0.5rem 3rem;
 	color: var(--color-white);
 	width: 100%;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal__title {
@@ -481,32 +485,36 @@ a:focus-visible,
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
 	font-weight: 400;
+	grid-column: 1;
+	grid-row: 1;
 }
 
 .modal__meta {
-	font-size: 0.625rem;
+	font-size: 0.575rem;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.4);
-	margin-top: 0.4rem;
-}
-
-.modal__description {
-	font-size: 0.75rem;
-	letter-spacing: 0.04em;
-	color: rgba(255, 255, 255, 0.6);
-	margin-top: 0.5rem;
-	max-width: 54ch;
-	margin-left: auto;
-	margin-right: auto;
-	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.35);
+	grid-column: 1;
+	grid-row: 2;
 }
 
 .modal__counter {
-	font-size: 0.625rem;
+	font-size: 0.575rem;
 	letter-spacing: 0.14em;
-	color: rgba(255, 255, 255, 0.3);
-	margin-top: 0.75rem;
+	color: rgba(255, 255, 255, 0.25);
+	grid-column: 1;
+	grid-row: 3;
+}
+
+.modal__description {
+	font-size: 0.8125rem;
+	letter-spacing: 0.01em;
+	color: rgba(255, 255, 255, 0.65);
+	line-height: 1.75;
+	white-space: pre-line;    /* préserve les sauts de ligne du contenu WP */
+	grid-column: 2;
+	grid-row: 1 / span 3;
+	align-self: start;
 }
 
 /* ─── Single Project Page ─────────────────────────────────────────────────────── */
@@ -796,7 +804,23 @@ a:focus-visible,
 	}
 
 	.modal__info {
-		padding: 1rem 1.5rem;
+		grid-template-columns: 1fr;
+		padding: 1.25rem 1.5rem;
+		gap: 0.35rem;
+	}
+
+	.modal__title,
+	.modal__meta,
+	.modal__counter,
+	.modal__description {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.modal__description {
+		margin-top: 0.75rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
 	.container { padding: 0 1.5rem; }
