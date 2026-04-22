@@ -124,6 +124,8 @@ get_header();
 			<div class="nav-zone nav-zone--prev" role="button" aria-label="<?php esc_attr_e('Previous project', 'jeanne'); ?>" tabindex="0"></div>
 			<div class="nav-zone nav-zone--next" role="button" aria-label="<?php esc_attr_e('Next project', 'jeanne'); ?>" tabindex="0"></div>
 
+
+
 		</div><!-- .slider -->
 
 	<?php else : ?>
@@ -133,7 +135,10 @@ get_header();
 		</div>
 
 	<?php endif; ?>
-
+	<?php $tagline = get_bloginfo('description');
+	if ($tagline) : ?>
+		<p class="slider__tagline"><?php echo esc_html($tagline); ?></p>
+	<?php endif; ?>
 </main>
 
 <!-- Project Modal / Lightbox -->

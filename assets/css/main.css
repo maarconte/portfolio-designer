@@ -3,9 +3,18 @@
    Minimalist black & white portfolio theme
    ============================================================================= */
 
+/* ─── Custom Fonts ───────────────────────────────────────────────────────────── */
+@font-face {
+	font-family: 'RetroflexBeta';
+	src: url('../fonts/RetroflexBeta-Light.otf') format('opentype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
 /* ─── Custom Properties ─────────────────────────────────────────────────────── */
 :root {
-	--jeanne-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--jeanne-font: 'RetroflexBeta', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--color-black: #000000;
 	--color-white: #ffffff;
 	--color-mid:   #888888;
@@ -13,6 +22,7 @@
 	--color-line:  #e0e0e0;
 
 	--header-height: 64px;
+	--tagline-height: 7rem;
 	--card-gap: 4vw;
 	--card-padding-v: 5vh;
 	--modal-z: 500;
@@ -114,8 +124,9 @@ a:focus-visible,
 .site-header__inner {
 	width: 100%;
 	display: flex;
+	gap: 1.5rem;
 	align-items: center;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	padding: 0 3rem;
 	pointer-events: auto;
 }
@@ -124,7 +135,7 @@ a:focus-visible,
 .site-title {
 	font-size: 0.6875rem;
 	letter-spacing: 0.2em;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	font-weight: 400;
 	color: var(--color-white); /* white inverted by blend mode = black on white bg */
 }
@@ -150,7 +161,7 @@ a:focus-visible,
 .site-nav .nav-menu a {
 	font-size: 0.6875rem;
 	letter-spacing: 0.18em;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	color: var(--color-white);
 	transition: opacity 0.2s;
 }
@@ -164,10 +175,13 @@ a:focus-visible,
 	height: 100vh;
 	overflow: hidden;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .slider {
-	height: 100%;
+	flex: 1 1 0;
+	min-height: 0;             /* allow flex child to shrink below content size */
 	overflow: hidden;
 	position: relative;
 	cursor: none;              /* replaced by custom cursor on desktop */
@@ -199,7 +213,7 @@ a:focus-visible,
 	/* Natural dimensions — height is constrained to the available viewport height */
 	width: auto;
 	height: auto;
-	max-height: calc(100vh - var(--card-padding-v) * 2 - 4rem);
+	max-height: calc(100vh - var(--tagline-height) - var(--card-padding-v) * 2 - 4rem);
 	/* max-width: 70vw; */
 	display: block;
 	transform: scale(1);
@@ -254,6 +268,26 @@ a:focus-visible,
 .project-card {
 	position: relative;
 	z-index: 25;
+}
+
+/* Tagline */
+.slider__tagline {
+	flex: 0 0 var(--tagline-height);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 2rem;
+	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	/* text-transform: uppercase; */
+	color: var(--color-mid);
+	pointer-events: none;
+	text-align: right;
+	@media (min-width: 768px) {
+		margin-left: auto;
+		max-width: calc(50vw - 3rem);
+	}
 }
 
 /* No-projects fallback */
