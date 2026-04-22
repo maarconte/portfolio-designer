@@ -460,6 +460,7 @@ a:focus-visible,
 	letter-spacing: 0.01em;
 	white-space: pre-line;
 	color: var(--color-black);
+	padding-right: 3rem;
 }
 
 /* Gallery slider inside the drawer */
