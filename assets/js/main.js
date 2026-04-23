@@ -58,7 +58,6 @@
 		track: null,
 		cards: [],
 		current: 0,
-		autoPlayTimer: null,
 		isWrapping: false,
 		_cardStep: 0,
 
@@ -74,11 +73,6 @@
 			this._setupMobileNav();
 			this._setupTouch();
 			this._setupKeyboard();
-			this._setupAutoPlay();
-
-			// Pause autoplay while hovering the slider
-			this.el.addEventListener('mouseenter', this.pauseAutoPlay.bind(this));
-			this.el.addEventListener('mouseleave', this.resumeAutoPlay.bind(this));
 
 			// Window resize: recalculate offset
 			var self = this;
@@ -161,26 +155,6 @@
 				if (e.key === 'ArrowLeft')  self.prev();
 				if (e.key === 'ArrowRight') self.next();
 			});
-		},
-
-		_setupAutoPlay: function () {
-			var delay = (typeof jeanneConfig !== 'undefined') ? jeanneConfig.autoplayDelay : 4000;
-			if (!delay || this.cards.length <= 1) return;
-
-			var self = this;
-			this.autoPlayTimer = setInterval(function () {
-				self.next();
-			}, delay);
-		},
-
-		pauseAutoPlay: function () {
-			clearInterval(this.autoPlayTimer);
-		},
-
-		resumeAutoPlay: function () {
-			if (Modal.isOpen()) return;
-			this.pauseAutoPlay();
-			this._setupAutoPlay();
 		},
 
 		_getCardStep: function () {
@@ -346,7 +320,6 @@
 			this.el.classList.add('is-open');
 			this._open = true;
 			document.body.classList.add('modal-open');
-			Slider.pauseAutoPlay();
 
 			var closeBtn = document.getElementById('modal-close');
 			if (closeBtn) closeBtn.focus();
@@ -356,7 +329,6 @@
 			this.el.classList.remove('is-open');
 			this._open = false;
 			document.body.classList.remove('modal-open');
-			Slider.resumeAutoPlay();
 
 			var self = this;
 			setTimeout(function () {

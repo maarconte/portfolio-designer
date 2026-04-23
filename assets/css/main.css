@@ -119,6 +119,7 @@ a:focus-visible,
 	align-items: center;
 	pointer-events: none;     /* let clicks pass through to slider */
 	mix-blend-mode: difference;
+	text-transform: uppercase;
 }
 
 .site-header__inner {
@@ -729,7 +730,9 @@ a:focus-visible,
 	.site-header__inner { padding: 0 2rem; }
 
 	.project-card__image img {
-		max-width: 80vw;
+		width: 100vw;
+		height: 30vh;
+		object-fit: cover;
 	}
 
 	.nav-zone {
@@ -745,7 +748,9 @@ a:focus-visible,
 	}
 
 	.project-card__image img {
-		max-width: 86vw;
+		width: auto;
+		height: 30vh;
+
 	}
 
 	/* On mobile show touch-friendly nav arrows at bottom of slider */
@@ -790,6 +795,12 @@ a:focus-visible,
 	.drawer__body {
 		padding-left: 1.5rem;
 		padding-right: 1.5rem;
+	}
+
+	.drawer__gallery img {
+		width: auto;
+		/* height: 40vh; */
+		max-width: 100%;
 	}
 
 	.container { padding: 0 1.5rem; }

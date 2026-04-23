@@ -30,11 +30,7 @@ function jeanne_enqueue_assets() {
 		true
 	);
 
-	// Pass theme settings to JS
-	$autoplay_delay = (int) get_theme_mod( 'jeanne_autoplay_delay', 4000 );
-
 	wp_localize_script( 'jeanne-main', 'jeanneConfig', array(
-		'autoplayDelay' => $autoplay_delay,
 		'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 		'homeUrl'       => home_url( '/' ),
 	) );
