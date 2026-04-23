@@ -276,14 +276,17 @@ a:focus-visible,
 	align-items: center;
 	justify-content: flex-end;
 	padding: 2rem;
-	font-size: 1rem;
+
 	font-weight: 600;
 	letter-spacing: 0.18em;
 	/* text-transform: uppercase; */
 	color: var(--color-mid);
 	pointer-events: none;
-	text-align: right;
+	text-align: center;
+	font-size: .8rem;
 	@media (min-width: 768px) {
+		text-align: right;
+		font-size: 1rem;
 		margin-left: auto;
 		max-width: calc(70vw - 3rem);
 	}
