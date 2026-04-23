@@ -221,9 +221,6 @@ a:focus-visible,
 	transition: transform 0.7s var(--ease-slide);
 }
 
-.project-card:hover .project-card__image img {
-	transform: scale(1.03);
-}
 
 .project-card__placeholder {
 	width: 100%;
@@ -288,7 +285,7 @@ a:focus-visible,
 	text-align: right;
 	@media (min-width: 768px) {
 		margin-left: auto;
-		max-width: calc(50vw - 3rem);
+		max-width: calc(70vw - 3rem);
 	}
 }
 
@@ -697,10 +694,6 @@ a:focus-visible,
 	height: 240px;
 	object-fit: cover;
 	transition: transform 0.5s var(--ease-slide);
-}
-
-.post-card:hover .post-card__thumb img {
-	transform: scale(1.03);
 }
 
 .post-card__title {
