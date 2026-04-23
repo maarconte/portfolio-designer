@@ -108,22 +108,22 @@
 			}
 		},
 
-		_setupMobileNav: function () {
-			if (!isTouch && window.innerWidth > 768) return;
+		// _setupMobileNav: function () {
+		// 	if (!isTouch && window.innerWidth > 768) return;
 
-			var mobileNav = document.createElement('div');
-			mobileNav.className = 'slider-mobile-nav';
-			mobileNav.innerHTML =
-				'<button class="slider-mobile-nav__btn" aria-label="Previous">\u2190</button>' +
-				'<button class="slider-mobile-nav__btn" aria-label="Next">\u2192</button>';
+		// 	var mobileNav = document.createElement('div');
+		// 	mobileNav.className = 'slider-mobile-nav';
+		// 	mobileNav.innerHTML =
+		// 		'<button class="slider-mobile-nav__btn" aria-label="Previous">\u2190</button>' +
+		// 		'<button class="slider-mobile-nav__btn" aria-label="Next">\u2192</button>';
 
-			var self = this;
-			var btns = mobileNav.querySelectorAll('.slider-mobile-nav__btn');
-			btns[0].addEventListener('click', function () { self.prev(); });
-			btns[1].addEventListener('click', function () { self.next(); });
+		// 	var self = this;
+		// 	var btns = mobileNav.querySelectorAll('.slider-mobile-nav__btn');
+		// 	btns[0].addEventListener('click', function () { self.prev(); });
+		// 	btns[1].addEventListener('click', function () { self.next(); });
 
-			this.el.appendChild(mobileNav);
-		},
+		// 	this.el.appendChild(mobileNav);
+		// },
 
 		// Find the card whose left edge is closest to the current scroll position.
 		_syncCurrent: function () {
@@ -286,9 +286,9 @@
 		// Build the gallery as a horizontal slider
 		_renderImages: function () {
 			if (!this.imageContainer) return;
-			
+
 			this._galleryIndex = 0;
-			
+
 			if (!this.images.length) {
 				this.imageContainer.innerHTML = '';
 				return;
