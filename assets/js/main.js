@@ -68,7 +68,7 @@
 			if (this.cards.length === 0) return;
 
 			this._setupNavZones();
-			this._setupMobileNav();
+			// this._setupMobileNav();
 			this._setupKeyboard();
 
 			// Sync current index on scroll

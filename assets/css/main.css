@@ -102,6 +102,26 @@ a:focus-visible,
 	font-weight: 400;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--font-ui);
+	text-transform: uppercase;
+}
+
+h1 {
+	font-size: 1.5rem;
+}
+h2 {
+	font-size: 1rem;
+}
+
+p {
+	font-size: .9rem;
+}
+
 /* ─── Layout Utilities ─────────────────────────────────────────────────────── */
 .container {
 	width: 100%;
@@ -176,7 +196,23 @@ a:focus-visible,
 	opacity: 0.5;
 }
 
+.site-branding {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
 /* ─── Front Page / Slider ────────────────────────────────────────────────────── */
+.site-main {
+	height: calc(100vh - var(--header-height) - 20px);
+}
+
+.site-main .container {
+	max-width: inherit;
+width: 100%;
+padding: 1rem;
+}
+
 .site-main--home {
 	height: 100vh;
 	padding-top: var(--header-height);
@@ -683,9 +719,9 @@ a:focus-visible,
 	max-width: 60ch;
 }
 
-.entry-content p { margin-bottom: 1.5rem; }
-.entry-content h2 { margin: 2.5rem 0 1rem; font-weight: 400; font-size: 1.15rem; letter-spacing: 0.04em; }
-.entry-content h3 { margin: 2rem 0 0.75rem; font-weight: 400; font-size: 1rem; letter-spacing: 0.04em; }
+.entry-content p { margin-bottom: 0; }
+.entry-content h2 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem;line-height: 14px; }
+.entry-content h3 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem; }
 .entry-content a { border-bottom: 1px solid currentColor; }
 .entry-content a:hover { opacity: 0.6; }
 .entry-content img { margin: 2rem 0; max-width: 100%; }
