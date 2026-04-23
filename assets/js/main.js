@@ -58,7 +58,6 @@
 		track: null,
 		cards: [],
 		current: 0,
-		isWrapping: false,
 		_cardStep: 0,
 
 		init: function () {
@@ -71,8 +70,17 @@
 
 			this._setupNavZones();
 			this._setupMobileNav();
-			this._setupTouch();
 			this._setupKeyboard();
+
+			// Sync current index on scroll
+			var self = this;
+			var scrollTimeout;
+			this.el.addEventListener('scroll', function () {
+				clearTimeout(scrollTimeout);
+				scrollTimeout = setTimeout(function () {
+					self._syncCurrent();
+				}, 100);
+			}, { passive: true });
 
 			// Window resize: recalculate offset
 			var self = this;
@@ -119,33 +127,10 @@
 			this.el.appendChild(mobileNav);
 		},
 
-		_setupTouch: function () {
-			var startX   = 0;
-			var startY   = 0;
-			var isDragging = false;
-			var self     = this;
-
-			this.el.addEventListener('touchstart', function (e) {
-				startX     = e.touches[0].clientX;
-				startY     = e.touches[0].clientY;
-				isDragging = true;
-			}, { passive: true });
-
-			this.el.addEventListener('touchend', function (e) {
-				if (!isDragging) return;
-				isDragging     = false;
-				var diffX      = startX - e.changedTouches[0].clientX;
-				var diffY      = startY - e.changedTouches[0].clientY;
-
-				// Only trigger if horizontal swipe is dominant
-				if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 45) {
-					if (diffX > 0) {
-						self.next();
-					} else {
-						self.prev();
-					}
-				}
-			}, { passive: true });
+		_syncCurrent: function () {
+			var step = this._getCardStep();
+			if (!step) return;
+			this.current = Math.round(this.el.scrollLeft / step);
 		},
 
 		_setupKeyboard: function () {
@@ -170,56 +155,21 @@
 
 		goTo: function (index, instant) {
 			if (this.cards.length === 0) return;
-			this.current = index;
+			this.current = Math.max(0, Math.min(index, this.cards.length - 1));
 			var offset   = this.current * this._getCardStep();
 
-			if (instant) {
-				var orig = this.track.style.transition;
-				this.track.style.transition = 'none';
-				this.track.style.transform  = 'translateX(-' + offset + 'px)';
-				// Force layout then restore transition
-				void this.track.offsetHeight;
-				this.track.style.transition = orig;
-			} else {
-				this.track.style.transform = 'translateX(-' + offset + 'px)';
-			}
-		},
-
-		_wrapTo: function (index) {
-			if (this.isWrapping) return;
-			this.isWrapping = true;
-			var self        = this;
-
-			this.track.style.opacity = '0';
-
-			setTimeout(function () {
-				self.goTo(index, true);
-
-				requestAnimationFrame(function () {
-					requestAnimationFrame(function () {
-						self.track.style.opacity   = '1';
-						self.isWrapping            = false;
-					});
-				});
-			}, 280);
+			this.el.scrollTo({
+				left: offset,
+				behavior: instant ? 'auto' : 'smooth'
+			});
 		},
 
 		next: function () {
-			if (this.isWrapping) return;
-			if (this.current >= this.cards.length - 1) {
-				this._wrapTo(0);
-			} else {
-				this.goTo(this.current + 1);
-			}
+			this.goTo(this.current + 1);
 		},
 
 		prev: function () {
-			if (this.isWrapping) return;
-			if (this.current <= 0) {
-				this._wrapTo(this.cards.length - 1);
-			} else {
-				this.goTo(this.current - 1);
-			}
+			this.goTo(this.current - 1);
 		}
 	};
 
