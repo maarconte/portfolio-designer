@@ -276,9 +276,9 @@ a:focus-visible,
 
 /* ─── Navigation Zones ───────────────────────────────────────────────────────── */
 .nav-zone {
-	position: absolute;
-	top: 0;
-	height: 100%;
+	position: fixed;
+	top: var(--header-height);
+	height: calc(100vh - var(--header-height) - var(--tagline-height));
 	width: 18%;
 	z-index: 20;
 	cursor: none;

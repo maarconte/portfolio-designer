@@ -58,7 +58,6 @@
 		track: null,
 		cards: [],
 		current: 0,
-		_cardStep: 0,
 
 		init: function () {
 			this.el    = document.getElementById('project-slider');
@@ -85,7 +84,6 @@
 			// Window resize: recalculate offset
 			var self = this;
 			window.addEventListener('resize', function () {
-				self._cardStep = 0; // Invalidate cache
 				self.goTo(self.current, true);
 			});
 		},
@@ -127,10 +125,16 @@
 			this.el.appendChild(mobileNav);
 		},
 
+		// Find the card whose left edge is closest to the current scroll position.
 		_syncCurrent: function () {
-			var step = this._getCardStep();
-			if (!step) return;
-			this.current = Math.round(this.el.scrollLeft / step);
+			var scrollLeft = this.el.scrollLeft;
+			var closest    = 0;
+			var minDist    = Infinity;
+			this.cards.forEach(function (card, i) {
+				var dist = Math.abs(card.offsetLeft - scrollLeft);
+				if (dist < minDist) { minDist = dist; closest = i; }
+			});
+			this.current = closest;
 		},
 
 		_setupKeyboard: function () {
@@ -142,24 +146,13 @@
 			});
 		},
 
-		_getCardStep: function () {
-			if (this._cardStep) return this._cardStep;
-			if (!this.cards.length) return 0;
-
-			var card  = this.cards[0];
-			var style = window.getComputedStyle(this.track);
-			var gap   = parseFloat(style.gap) || parseFloat(style.columnGap) || 0;
-			this._cardStep = card.offsetWidth + gap;
-			return this._cardStep;
-		},
-
+		// Scroll to the exact offsetLeft of the target card — works for any card width.
 		goTo: function (index, instant) {
 			if (this.cards.length === 0) return;
 			this.current = Math.max(0, Math.min(index, this.cards.length - 1));
-			var offset   = this.current * this._getCardStep();
 
 			this.el.scrollTo({
-				left: offset,
+				left:     this.cards[this.current].offsetLeft,
 				behavior: instant ? 'auto' : 'smooth'
 			});
 		},
