@@ -10,6 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function jeanne_enqueue_assets() {
+	// Google Fonts — DM Sans 600 + Averia Serif Libre 300 / 300i
+	wp_enqueue_style(
+		'jeanne-google-fonts',
+		'https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;1,300&family=DM+Sans:wght@600&display=swap',
+		array(),
+		null
+	);
+
 	// Main stylesheet (theme declaration file — minimal)
 	wp_enqueue_style( 'jeanne-style', get_stylesheet_uri(), array(), JEANNE_VERSION );
 

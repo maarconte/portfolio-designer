@@ -28,6 +28,9 @@
 	--modal-z: 500;
 	--cursor-z: 600;
 
+	--font-ui:   'DM Sans', system-ui, sans-serif;
+	--font-body: 'Averia Serif Libre', Georgia, serif;
+
 	--ease-slide: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	--ease-fade:  cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -160,9 +163,11 @@ a:focus-visible,
 }
 
 .site-nav .nav-menu a {
+	font-family: var(--font-ui);
 	font-size: 0.6875rem;
+	font-weight: 600;
 	letter-spacing: 0.18em;
-	/* text-transform: uppercase; */
+	text-transform: uppercase;
 	color: var(--color-white);
 	transition: opacity 0.2s;
 }
@@ -296,13 +301,14 @@ a:focus-visible,
 	justify-content: flex-end;
 	padding: 2rem;
 
-	font-weight: 600;
-	letter-spacing: 0.18em;
-	/* text-transform: uppercase; */
+	font-family: var(--font-body);
+	font-weight: 300;
+	font-style: italic;
+	font-size: 1rem;
+	letter-spacing: 0.02em;
 	color: var(--color-mid);
 	pointer-events: none;
 	text-align: center;
-	font-size: .8rem;
 	@media (min-width: 768px) {
 		text-align: right;
 		font-size: 1rem;
@@ -352,7 +358,9 @@ a:focus-visible,
 
 .custom-cursor__text {
 	display: none;
-	font-size: 1rem;
+	font-family: var(--font-ui);
+	font-size: 0.625rem;
+	font-weight: 600;
 	letter-spacing: 0.22em;
 	text-transform: uppercase;
 	color: var(--color-white);
@@ -435,9 +443,11 @@ a:focus-visible,
 }
 
 .modal__title {
-	font-size: 1rem;
-	letter-spacing: 0.06em;
-	font-weight: 400;
+	font-family: var(--font-ui);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
 	line-height: 1.4;
 	color: var(--color-black);
 }
@@ -475,12 +485,13 @@ a:focus-visible,
 
 /* Description */
 .modal__description {
-	font-size: 0.875rem;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	font-weight: 300;
 	line-height: 1.8;
 	letter-spacing: 0.01em;
 	white-space: pre-line;
 	color: var(--color-black);
-	padding-right: 3rem;
 }
 
 /* Gallery slider inside the drawer */
@@ -657,13 +668,17 @@ a:focus-visible,
 }
 
 .page-title {
-	font-size: clamp(1.5rem, 4vw, 2.5rem);
-	font-weight: 300;
-	letter-spacing: -0.01em;
+	font-family: var(--font-ui);
+	font-size: clamp(1.25rem, 3vw, 2rem);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 .entry-content {
+	font-family: var(--font-body);
 	font-size: 1rem;
+	font-weight: 300;
 	line-height: 1.8;
 	max-width: 60ch;
 }
