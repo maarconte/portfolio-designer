@@ -15,14 +15,17 @@
 		<div class="site-header__inner">
 
 			<div class="site-branding">
-				<?php if (has_custom_logo()) : ?>
-					<?php the_custom_logo(); ?>
-				<?php endif; ?>
 				<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title" rel="home">
-					<?php bloginfo('name'); ?>
+					<?php if (has_custom_logo()) : ?>
+						<?php the_custom_logo(); ?>
+					<?php endif; ?>
 				</a>
 
 			</div>
+
+			<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title" rel="home">
+				<?php bloginfo('name'); ?>
+			</a>
 
 			<?php
 			wp_nav_menu(array(

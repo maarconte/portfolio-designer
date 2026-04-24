@@ -3,18 +3,8 @@
    Minimalist black & white portfolio theme
    ============================================================================= */
 
-/* ─── Custom Fonts ───────────────────────────────────────────────────────────── */
-@font-face {
-	font-family: 'RetroflexBeta';
-	src: url('../fonts/RetroflexBeta-Light.otf') format('opentype');
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-
 /* ─── Custom Properties ─────────────────────────────────────────────────────── */
 :root {
-	--jeanne-font: 'RetroflexBeta', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--color-black: #000000;
 	--color-white: #ffffff;
 	--color-mid:   #888888;
@@ -50,7 +40,7 @@ html {
 }
 
 body {
-	font-family: var(--jeanne-font);
+	font-family: var(--font-body);
 	background-color: var(--color-white);
 	color: var(--color-black);
 	line-height: 1.6;
@@ -109,6 +99,7 @@ h4,
 h5 {
 	font-family: var(--font-ui);
 	text-transform: uppercase;
+	letter-spacing: 0.18em;
 }
 
 h1 {
@@ -157,11 +148,13 @@ p {
 
 /* mix-blend-mode: difference inverts against background — text appears white on dark, black on light */
 .site-title {
-	font-size: 0.6875rem;
-	letter-spacing: 0.2em;
-	/* text-transform: uppercase; */
-	font-weight: 400;
-	color: var(--color-white); /* white inverted by blend mode = black on white bg */
+	font-family: var(--font-ui);
+		font-size: 0.9rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-white);
+		transition: opacity 0.2s;
 }
 
 .site-title:hover {
@@ -184,7 +177,7 @@ p {
 
 .site-nav .nav-menu a {
 	font-family: var(--font-ui);
-	font-size: 0.6875rem;
+	font-size: 0.9rem;
 	font-weight: 600;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
@@ -194,12 +187,6 @@ p {
 
 .site-nav .nav-menu a:hover {
 	opacity: 0.5;
-}
-
-.site-branding {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
 }
 
 /* ─── Front Page / Slider ────────────────────────────────────────────────────── */
@@ -336,18 +323,18 @@ padding: 1rem;
 	align-items: center;
 	justify-content: flex-end;
 	padding: 2rem;
-
 	font-family: var(--font-body);
 	font-weight: 300;
 	font-style: italic;
 	font-size: 1rem;
 	letter-spacing: 0.02em;
-	color: var(--color-mid);
+	line-height: 1;
+	color: var(--color-black);
 	pointer-events: none;
 	text-align: center;
 	@media (min-width: 768px) {
 		text-align: right;
-		font-size: 1rem;
+		font-size: 1.7rem;
 		margin-left: auto;
 		max-width: calc(70vw - 3rem);
 	}
@@ -656,7 +643,6 @@ padding: 1rem;
 
 /* ─── Site Footer ─────────────────────────────────────────────────────────────── */
 .site-footer {
-	border-top: 1px solid var(--color-line);
 	padding: 2rem 0;
 }
 
@@ -669,6 +655,7 @@ padding: 1rem;
 
 .site-footer__copy,
 .site-footer__left {
+	font-family: var(--font-ui);
 	font-size: 0.625rem;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
