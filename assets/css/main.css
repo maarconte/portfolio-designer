@@ -709,8 +709,7 @@ padding: 1rem;
 .entry-content p { margin-bottom: 0; }
 .entry-content h2 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem;line-height: 14px; }
 .entry-content h3 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem; }
-.entry-content a { border-bottom: 1px solid currentColor; }
-.entry-content a:hover { opacity: 0.6; }
+.entry-content a:hover { opacity: 0.6; border-bottom: 1px solid currentColor;}
 .entry-content img { margin: 2rem 0; max-width: 100%; }
 
 /* ─── 404 ─────────────────────────────────────────────────────────────────────── */
