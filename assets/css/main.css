@@ -99,7 +99,8 @@ h4,
 h5 {
 	font-family: var(--font-ui);
 	text-transform: uppercase;
-	letter-spacing: 0.18em;
+	font-weight: 700;
+	/* letter-spacing: 0.18em; */
 }
 
 h1 {
@@ -149,9 +150,9 @@ p {
 /* mix-blend-mode: difference inverts against background — text appears white on dark, black on light */
 .site-title {
 	font-family: var(--font-ui);
-		font-size: 0.9rem;
-		font-weight: 600;
-		letter-spacing: 0.18em;
+		font-size: 1rem;
+		font-weight: 700;
+		/* letter-spacing: 0.18em; */
 		text-transform: uppercase;
 		color: var(--color-white);
 		transition: opacity 0.2s;
@@ -177,9 +178,9 @@ p {
 
 .site-nav .nav-menu a {
 	font-family: var(--font-ui);
-	font-size: 0.9rem;
-	font-weight: 600;
-	letter-spacing: 0.18em;
+	font-size: 1rem;
+	font-weight: 700;
+	/* letter-spacing: 0.18em; */
 	text-transform: uppercase;
 	color: var(--color-white);
 	transition: opacity 0.2s;
@@ -282,7 +283,7 @@ padding: 1rem;
 }
 
 .project-card__title {
-	font-size: 0.6875rem;
+	font-size: 0.9rem;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	font-weight: 400;
@@ -322,7 +323,7 @@ padding: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	padding: 2rem;
+	padding: 1rem;
 	font-family: var(--font-body);
 	font-weight: 300;
 	font-style: italic;
@@ -467,7 +468,7 @@ padding: 1rem;
 
 .modal__title {
 	font-family: var(--font-ui);
-	font-size: 0.75rem;
+	font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -706,9 +707,9 @@ padding: 1rem;
 	max-width: 60ch;
 }
 
-.entry-content p { margin-bottom: 0; }
-.entry-content h2 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem;line-height: 14px; }
-.entry-content h3 { margin: 1.4rem 0 ; font-weight: 400; font-size: 1rem; }
+.entry-content p { margin-bottom: 1.5rem; }
+.entry-content h2 { margin: .9rem 0 ; font-weight: 400; font-size: 1rem;line-height: 14px; }
+.entry-content h3 { margin: .9rem 0 ; font-weight: 400; font-size: 1rem; }
 .entry-content a:hover { opacity: 0.6; border-bottom: 1px solid currentColor;}
 .entry-content img { margin: 2rem 0; max-width: 100%; }
 
