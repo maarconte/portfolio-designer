@@ -389,11 +389,6 @@ padding: 1rem 3rem;
 
 .custom-cursor__text {
 	display: none;
-	font-family: var(--font-ui);
-	font-size: 0.625rem;
-	font-weight: 600;
-	letter-spacing: 0.22em;
-	text-transform: uppercase;
 	color: var(--color-white);
 	background: var(--color-black);
 	padding: 0.35rem 0.7rem;
