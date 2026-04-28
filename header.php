@@ -15,15 +15,39 @@
 		<div class="site-header__inner">
 
 			<div class="site-branding">
-				<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title" rel="home">
-					<?php if (has_custom_logo()) : ?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-title" rel="home">
+					<?php
+					$random_logos = jeanne_get_random_logos();
+					if ( ! empty( $random_logos ) ) :
+						$logos_json = wp_json_encode( $random_logos );
+					?>
+						<div class="random-logo-wrap" data-logos="<?php echo esc_attr( $logos_json ); ?>">
+							<img
+								class="custom-logo random-logo"
+								src=""
+								alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
+								width="200"
+								height="60"
+							>
+						</div>
+						<script>
+						(function(){
+							var wrap  = document.currentScript.previousElementSibling;
+							var img   = wrap.querySelector('img');
+							var logos = JSON.parse(wrap.dataset.logos);
+							if (logos && logos.length) {
+								img.src = logos[Math.floor(Math.random() * logos.length)];
+							}
+						})();
+						</script>
+					<?php elseif ( has_custom_logo() ) : ?>
 						<?php the_custom_logo(); ?>
 					<?php endif; ?>
 				</a>
 
 			</div>
 
-			<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title" rel="home">
+			<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title text-title" rel="home">
 				<?php bloginfo('name'); ?>
 			</a>
 
@@ -31,7 +55,7 @@
 			wp_nav_menu(array(
 				'theme_location'  => 'primary',
 				'container'       => 'nav',
-				'container_class' => 'site-nav',
+				'container_class' => 'site-nav text-title',
 				'container_id'    => 'site-navigation',
 				'menu_class'      => 'nav-menu',
 				'fallback_cb'     => false,

@@ -87,8 +87,45 @@ function jeanne_customizer_register( $wp_customize ) {
 		'section'     => 'jeanne_typography',
 		'type'        => 'text',
 	) );
+
+	// ─── Random Logos Section ────────────────────────────────────────────────────
+	$wp_customize->add_section( 'jeanne_random_logos', array(
+		'title'       => __( 'Logos aléatoires', 'jeanne' ),
+		'description' => __( 'Uploadez jusqu\'à 5 logos. Un sera choisi aléatoirement à chaque chargement de page. Laissez les emplacements vides pour en utiliser moins.', 'jeanne' ),
+		'priority'    => 25,
+	) );
+
+	for ( $i = 1; $i <= 5; $i++ ) {
+		$wp_customize->add_setting( 'jeanne_random_logo_' . $i, array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'         => 'refresh',
+		) );
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'jeanne_random_logo_' . $i,
+				array(
+					'label'    => sprintf( __( 'Logo %d', 'jeanne' ), $i ),
+					'section'  => 'jeanne_random_logos',
+					'settings' => 'jeanne_random_logo_' . $i,
+				)
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'jeanne_customizer_register' );
+
+function jeanne_get_random_logos() {
+	$logos = array();
+	for ( $i = 1; $i <= 5; $i++ ) {
+		$url = get_theme_mod( 'jeanne_random_logo_' . $i, '' );
+		if ( $url ) {
+			$logos[] = esc_url( $url );
+		}
+	}
+	return $logos;
+}
 
 /**
  * Selective refresh bindings for the Customizer live preview.

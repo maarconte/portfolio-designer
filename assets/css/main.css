@@ -114,6 +114,23 @@ p {
 	font-size: .9rem;
 }
 
+.text-title, h2 {
+	font-family: var(--font-ui);
+		font-size: 1.15rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-black);
+		transition: opacity 0.2s;
+		margin-bottom: 0.35rem;
+}
+
+.text-body {}
+.text-meta{
+	font-size: 0.95rem;
+	font-style: italic;
+	color: var(--color-mid);
+}
+
 /* ─── Layout Utilities ─────────────────────────────────────────────────────── */
 .container {
 	width: 100%;
@@ -124,6 +141,7 @@ p {
 
 /* ─── Site Header ────────────────────────────────────────────────────────────── */
 .site-header {
+		padding: 15px 0 0 0;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -133,7 +151,6 @@ p {
 	display: flex;
 	align-items: center;
 	pointer-events: none;     /* let clicks pass through to slider */
-	mix-blend-mode: difference;
 	text-transform: uppercase;
 }
 
@@ -149,13 +166,7 @@ p {
 
 /* mix-blend-mode: difference inverts against background — text appears white on dark, black on light */
 .site-title {
-	font-family: var(--font-ui);
-		font-size: 1rem;
-		font-weight: 700;
-		/* letter-spacing: 0.18em; */
-		text-transform: uppercase;
-		color: var(--color-white);
-		transition: opacity 0.2s;
+bottom: 0;
 }
 
 .site-title:hover {
@@ -164,9 +175,17 @@ p {
 
 /* Custom logo inherits blend mode */
 .site-header .custom-logo-link img {
-	height: 28px;
+	height: 55px;
 	width: auto;
-	filter: invert(1);         /* invert logo so blend mode works consistently */
+}
+
+.site-header .random-logo {
+	height: 55px;
+	width: auto;
+}
+
+.site-header .random-logo[src=""] {
+	visibility: hidden;
 }
 
 /* Primary nav */
@@ -182,7 +201,7 @@ p {
 	font-weight: 700;
 	/* letter-spacing: 0.18em; */
 	text-transform: uppercase;
-	color: var(--color-white);
+	color: var(--color-black);
 	transition: opacity 0.2s;
 }
 
@@ -198,7 +217,7 @@ p {
 .site-main .container {
 	max-width: inherit;
 width: 100%;
-padding: 1rem;
+padding: 1rem 3rem;
 }
 
 .site-main--home {
@@ -250,6 +269,9 @@ padding: 1rem;
 	padding: var(--card-padding-v) 0;
 	cursor: none;
 	scroll-snap-align: center;
+	&:first-child .project-card__info{
+		padding-left: 3rem;
+	}
 }
 
 .project-card__image {
@@ -282,21 +304,6 @@ padding: 1rem;
 	padding-left: 1.25rem;
 }
 
-.project-card__title {
-	font-size: 0.9rem;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	font-weight: 400;
-	line-height: 1.4;
-}
-
-.project-card__meta {
-	font-size: 0.625rem;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: var(--color-mid);
-	margin-top: 0.35rem;
-}
 
 /* ─── Navigation Zones ───────────────────────────────────────────────────────── */
 .nav-zone {
@@ -470,18 +477,8 @@ padding: 1rem;
 	font-family: var(--font-ui);
 	font-size: 1rem;
 	font-weight: 600;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
 	line-height: 1.4;
 	color: var(--color-black);
-}
-
-.modal__meta {
-	font-size: 0.625rem;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: var(--color-mid);
-	margin-top: 0.35rem;
 }
 
 /* Close button */
@@ -709,8 +706,6 @@ padding: 1rem;
 }
 
 .entry-content p { margin-bottom: 1.5rem; }
-.entry-content h2 { margin: .9rem 0 ; font-weight: 400; font-size: 1rem;line-height: 14px; }
-.entry-content h3 { margin: .9rem 0 ; font-weight: 400; font-size: 1rem; }
 .entry-content a:hover { opacity: 0.6; border-bottom: 1px solid currentColor;}
 .entry-content img { margin: 2rem 0; max-width: 100%; }
 

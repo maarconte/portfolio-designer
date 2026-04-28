@@ -57,9 +57,9 @@ get_header();
 						</div>
 
 						<div class="project-card__info">
-							<h2 class="project-card__title"><?php echo esc_html($project_data['title']); ?></h2>
+							<h2 class="project-card__title text-title"><?php echo esc_html($project_data['title']); ?></h2>
 							<?php if ($project_data['category']) : ?>
-								<p class="project-card__meta"><?php echo esc_html($project_data['category']); ?></p>
+								<p class="project-card__meta text-meta"><?php echo esc_html($project_data['category']); ?></p>
 							<?php endif; ?>
 						</div>
 
@@ -111,8 +111,8 @@ get_header();
 
 		<header class="drawer__header">
 			<div>
-				<h2 class="modal__title" id="modal-title"></h2>
-				<p class="modal__meta" id="modal-meta"></p>
+				<h2 class="modal__title text-title" id="modal-title"></h2>
+				<p class="modal__meta text-meta" id="modal-meta"></p>
 			</div>
 			<button class="modal__close" id="modal-close" aria-label="<?php esc_attr_e('Fermer', 'jeanne'); ?>">
 				&#x2715;
