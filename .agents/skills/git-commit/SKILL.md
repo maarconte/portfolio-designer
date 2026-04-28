@@ -23,19 +23,27 @@ Create standardized, semantic git commits using the Conventional Commits specifi
 
 ## Commit Types
 
-| Type       | Purpose                        |
-| ---------- | ------------------------------ |
-| `feat`     | New feature                    |
-| `fix`      | Bug fix                        |
-| `docs`     | Documentation only             |
-| `style`    | Formatting/style (no logic)    |
-| `refactor` | Code refactor (no feature/fix) |
-| `perf`     | Performance improvement        |
-| `test`     | Add/update tests               |
-| `build`    | Build system/dependencies      |
-| `ci`       | CI/config changes              |
-| `chore`    | Maintenance/misc               |
-| `revert`   | Revert commit                  |
+| Type       | Emoji | Purpose                        |
+| ---------- | ----- | ------------------------------ |
+| `feat`     | ✨    | New feature                    |
+| `fix`      | 🐛    | Bug fix                        |
+| `docs`     | 📝    | Documentation only             |
+| `style`    | 💄    | Formatting/style (no logic)    |
+| `refactor` | ♻️    | Code refactor (no feature/fix) |
+| `perf`     | ⚡️    | Performance improvement        |
+| `test`     | 🧪    | Add/update tests               |
+| `build`    | 🏗️    | Build system/dependencies      |
+| `ci`       | 👷    | CI/config changes              |
+| `chore`    | 🔧    | Maintenance/misc               |
+| `revert`   | ⏪️    | Revert commit                  |
+
+Always prefix the commit message description with the corresponding emoji:
+
+```
+<type>[optional scope]: <emoji> <description>
+```
+
+Example: `feat(auth): ✨ add OAuth2 login support`
 
 ## Breaking Changes
 
