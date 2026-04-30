@@ -17,7 +17,7 @@
 			<div class="site-branding">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-title" rel="home">
 					<?php
-					$random_logos = jeanne_get_random_logos();
+					$random_logos = get_theme_mod( 'jeanne_random_logos_enabled', true ) ? jeanne_get_random_logos() : array();
 					if ( ! empty( $random_logos ) ) :
 						$logos_json = wp_json_encode( $random_logos );
 					?>

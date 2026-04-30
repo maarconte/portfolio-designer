@@ -95,6 +95,17 @@ function jeanne_customizer_register( $wp_customize ) {
 		'priority'    => 25,
 	) );
 
+	$wp_customize->add_setting( 'jeanne_random_logos_enabled', array(
+		'default'           => true,
+		'sanitize_callback' => 'rest_sanitize_boolean',
+		'transport'         => 'refresh',
+	) );
+	$wp_customize->add_control( 'jeanne_random_logos_enabled', array(
+		'label'   => __( 'Activer les logos aléatoires', 'jeanne' ),
+		'section' => 'jeanne_random_logos',
+		'type'    => 'checkbox',
+	) );
+
 	for ( $i = 1; $i <= 5; $i++ ) {
 		$wp_customize->add_setting( 'jeanne_random_logo_' . $i, array(
 			'default'           => '',
