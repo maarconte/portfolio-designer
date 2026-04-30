@@ -41,6 +41,7 @@ function jeanne_enqueue_assets() {
 	wp_localize_script( 'jeanne-main', 'jeanneConfig', array(
 		'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 		'homeUrl'       => home_url( '/' ),
+		'themeUrl'      => JEANNE_URI,
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'jeanne_enqueue_assets' );

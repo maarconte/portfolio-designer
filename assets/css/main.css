@@ -382,9 +382,13 @@ padding: 1rem 3rem;
 
 .custom-cursor__arrow {
 	display: none;
-	font-size: 3rem;
-	line-height: 1;
-	color: var(--color-black);
+}
+
+.custom-cursor__arrow img {
+	display: block;
+	width: 2.5rem;
+	height: auto;
+	max-width: none;
 }
 
 .custom-cursor__text {

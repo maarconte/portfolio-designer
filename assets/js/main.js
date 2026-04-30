@@ -43,9 +43,9 @@
 			this.el.classList.add('is-visible', 'state-' + state);
 
 			if (state === 'arrow-left' && this.arrowEl) {
-				this.arrowEl.textContent = '\u2190'; // ←
+				this.arrowEl.innerHTML = '<img src="' + jeanneConfig.themeUrl + '/assets/img/left.png" alt="">';
 			} else if (state === 'arrow-right' && this.arrowEl) {
-				this.arrowEl.textContent = '\u2192'; // →
+				this.arrowEl.innerHTML = '<img src="' + jeanneConfig.themeUrl + '/assets/img/right.png" alt="">';
 			}
 		}
 	};
