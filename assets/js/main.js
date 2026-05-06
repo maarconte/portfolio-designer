@@ -96,15 +96,11 @@
 			if (prevZone) {
 				prevZone.addEventListener('click', function () { self.prev(); });
 				prevZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') self.prev(); });
-				prevZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-left'); });
-				prevZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
 			}
 
 			if (nextZone) {
 				nextZone.addEventListener('click', function () { self.next(); });
 				nextZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') self.next(); });
-				nextZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-right'); });
-				nextZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
 			}
 		},
 
