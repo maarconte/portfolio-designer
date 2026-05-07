@@ -121,7 +121,7 @@ p {
 		text-transform: uppercase;
 		color: var(--color-black);
 		transition: opacity 0.2s;
-		margin-bottom: 0.35rem;
+		margin-bottom: 0.15rem;
 }
 
 .text-body {}
@@ -255,13 +255,13 @@ padding: 1rem 3rem;
 }
 
 .slider::-webkit-scrollbar-thumb {
-	background-color: var(--color-mid);
+	background-color: #ccc;
 	border-radius: 10px;
 	border: 1px solid var(--color-light);
 }
 
 .slider::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-black);
+	background-color: var(--color-mid);
 }
 
 .slider__track {
@@ -355,6 +355,10 @@ padding: 1rem 3rem;
 		margin-left: auto;
 		max-width: calc(70vw - 3rem);
 	}
+	@media (max-width: 1440px) {
+		flex: 0 0 6rem;
+	}
+
 }
 
 /* No-projects fallback */
