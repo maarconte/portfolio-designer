@@ -317,14 +317,10 @@
 				var prevZone = document.createElement('div');
 				prevZone.className = 'drawer__gallery-nav drawer__gallery-nav--prev';
 				prevZone.addEventListener('click', function () { self._galleryPrev(); });
-				prevZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-left'); });
-				prevZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
 
 				var nextZone = document.createElement('div');
 				nextZone.className = 'drawer__gallery-nav drawer__gallery-nav--next';
 				nextZone.addEventListener('click', function () { self._galleryNext(); });
-				nextZone.addEventListener('mouseenter', function () { Cursor.setState('arrow-right'); });
-				nextZone.addEventListener('mouseleave', function () { Cursor.setState(null); });
 
 				sliderEl.appendChild(prevZone);
 				sliderEl.appendChild(nextZone);

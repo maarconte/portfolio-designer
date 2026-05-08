@@ -538,7 +538,7 @@ padding: 1rem 3rem;
 	position: relative;
 	margin-top: 3rem;
 	overflow: hidden;
-	cursor: none;
+	cursor: default;
 }
 
 .drawer__gallery {
@@ -561,7 +561,7 @@ padding: 1rem 3rem;
 	height: 100%;
 	width: 50%;
 	z-index: 5;
-	cursor: none;
+	cursor: pointer;
 }
 
 .drawer__gallery-nav--prev { left: 0; }
