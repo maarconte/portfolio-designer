@@ -12,7 +12,7 @@
 	--color-line:  #e0e0e0;
 
 	--header-height: 64px;
-	--tagline-height: 7rem;
+	--tagline-height: 5rem;
 	--card-gap: 4vw;
 	--card-padding-v: 5vh;
 	--modal-z: 500;
@@ -227,19 +227,22 @@ padding: 1rem 3rem;
 	padding-top: var(--header-height);
 	overflow: hidden;
 	position: relative;
-	display: flex;
-	flex-direction: column;
+	@media (max-width: 1024px) {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .slider {
-	flex: 1 1 0;
 	min-height: 0;
 	overflow-x: scroll;
 	overflow-y: hidden;
 	position: relative;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	padding-bottom: 20px; /* Space for the scrollbar to prevent clipping */
+	@media (max-width: 1024px) {
+		flex: 1;
+	}
 }
 
 /* Custom Scrollbar for Webkit (Chrome, Safari, Edge) */
@@ -309,8 +312,7 @@ padding: 1rem 3rem;
 
 .project-card__info {
 	flex: 0 0 auto;
-	padding-top: 1.25rem;
-	padding-left: 1.25rem;
+	padding: 1rem;
 }
 
 
@@ -335,7 +337,6 @@ padding: 1rem 3rem;
 
 /* Tagline */
 .slider__tagline {
-	flex: 0 0 var(--tagline-height);
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -349,14 +350,18 @@ padding: 1rem 3rem;
 	color: var(--color-black);
 	pointer-events: none;
 	text-align: center;
+
 	@media (min-width: 768px) {
+		font-size: 1.25rem;
 		text-align: right;
-		font-size: 1.7rem;
 		margin-left: auto;
-		max-width: calc(70vw - 3rem);
 	}
-	@media (max-width: 1440px) {
-		flex: 0 0 6rem;
+	@media (min-width: 1024px) {
+		max-width: calc(90vw - 3rem);
+	}
+
+	@media (min-width: 1280px) {
+		max-width: calc(60vw - 3rem);
 	}
 
 }
@@ -790,11 +795,7 @@ padding: 1rem 3rem;
 
 	.site-header__inner { padding: 0 2rem; }
 
-	.project-card__image img {
-		width: 100vw;
-		height: 30vh;
-		object-fit: cover;
-	}
+
 
 	.nav-zone {
 		width: 12%;
@@ -810,7 +811,7 @@ padding: 1rem 3rem;
 
 	.project-card__image img {
 		width: auto;
-		height: 30vh;
+		height: 60vh;
 
 	}
 
@@ -874,6 +875,12 @@ padding: 1rem 3rem;
 	:root {
 		--card-width: 88vw;
 	}
+
+		.project-card__image img {
+			width: 100vw;
+			height: 30vh;
+			object-fit: cover;
+		}
 }
 
 /* ─── Reduce Motion ──────────────────────────────────────────────────────────── */
