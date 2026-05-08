@@ -121,7 +121,6 @@ p {
 		text-transform: uppercase;
 		color: var(--color-black);
 		transition: opacity 0.2s;
-		margin-bottom: 0.15rem;
 }
 
 .text-body {}
