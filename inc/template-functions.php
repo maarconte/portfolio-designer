@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function jeanne_get_project_data( $post_id ) {
 	$title       = get_the_title( $post_id );
 	$content     = get_post( $post_id )->post_content;
-	$description = wp_strip_all_tags( $content );
+	$description = preg_replace( '/<p>(\s|&nbsp;)*<\/p>/', '', wp_kses_post( wpautop( $content ) ) );
 	$permalink   = get_permalink( $post_id );
 	$year        = get_post_meta( $post_id, '_jeanne_year', true );
 	$client      = get_post_meta( $post_id, '_jeanne_client', true );

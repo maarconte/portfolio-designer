@@ -246,7 +246,7 @@
 			}
 
 			if (this.descEl) {
-				this.descEl.textContent   = description;
+				this.descEl.innerHTML     = description;
 				this.descEl.style.display = description ? '' : 'none';
 			}
 

@@ -120,7 +120,7 @@ get_header();
 		</header>
 
 		<div class="drawer__body">
-			<p class="modal__description" id="modal-description"></p>
+			<div class="modal__description" id="modal-description"></div>
 			<div class="drawer__gallery" id="modal-image-container"></div>
 		</div>
 
