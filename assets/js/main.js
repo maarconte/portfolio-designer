@@ -31,10 +31,11 @@
 			});
 		},
 
-		setState: function (state) {
+		setState: function (state, text) {
 			if (!this.el) return;
-			if (this.state === state) return;
+			if (this.state === state && this._text === text) return;
 			this.state = state;
+			this._text = text;
 
 			this.el.className = 'custom-cursor';
 
@@ -42,10 +43,13 @@
 
 			this.el.classList.add('is-visible', 'state-' + state);
 
-			if (state === 'arrow-left' && this.arrowEl) {
-				this.arrowEl.innerHTML = '<img src="' + jeanneConfig.themeUrl + '/assets/img/left.png" alt="">';
-			} else if (state === 'arrow-right' && this.arrowEl) {
-				this.arrowEl.innerHTML = '<img src="' + jeanneConfig.themeUrl + '/assets/img/right.png" alt="">';
+			var textEl = this.el.querySelector('.custom-cursor__text');
+			if (textEl) {
+				if (text) {
+					textEl.textContent = text;
+				} else if (state === 'more') {
+					textEl.textContent = 'Voir';
+				}
 			}
 		}
 	};
@@ -93,14 +97,56 @@
 			var nextZone = this.el.querySelector('.nav-zone--next');
 			var self     = this;
 
+			// Keep keydown for accessibility
 			if (prevZone) {
-				prevZone.addEventListener('click', function () { self.prev(); });
 				prevZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') self.prev(); });
 			}
 
 			if (nextZone) {
-				nextZone.addEventListener('click', function () { self.next(); });
 				nextZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') self.next(); });
+			}
+
+			// Handle clicks directly on the slider container
+			this.el.addEventListener('click', function (e) {
+				var rect = self.el.getBoundingClientRect();
+				var x = e.clientX - rect.left;
+
+				if (x < rect.width * 0.05) {
+					e.stopPropagation();
+					e.preventDefault();
+					self.prev();
+				} else if (x > rect.width * 0.95) {
+					e.stopPropagation();
+					e.preventDefault();
+					self.next();
+				}
+			}, true); // use capture phase to take precedence over cards
+
+			if (!isTouch) {
+				this.el.addEventListener('mousemove', function (e) {
+					var rect = self.el.getBoundingClientRect();
+					var x = e.clientX - rect.left;
+
+					if (x < rect.width * 0.05) {
+						self.el.classList.add('is-edge-hover');
+						Cursor.setState(null);
+					} else if (x > rect.width * 0.95) {
+						self.el.classList.add('is-edge-hover');
+						Cursor.setState(null);
+					} else {
+						self.el.classList.remove('is-edge-hover');
+						if (e.target.closest('.project-card__image')) {
+							Cursor.setState('more');
+						} else {
+							Cursor.setState(null);
+						}
+					}
+				});
+
+				this.el.addEventListener('mouseleave', function () {
+					self.el.classList.remove('is-edge-hover');
+					Cursor.setState(null);
+				});
 			}
 		},
 
@@ -212,12 +258,6 @@
 						self.open(card);
 					}
 				});
-
-				var imgEl = card.querySelector('.project-card__image');
-				if (imgEl && !isTouch) {
-					imgEl.addEventListener('mouseenter', function () { Cursor.setState('more'); });
-					imgEl.addEventListener('mouseleave', function () { Cursor.setState(null); });
-				}
 			});
 		},
 
@@ -324,6 +364,11 @@
 
 				sliderEl.appendChild(prevZone);
 				sliderEl.appendChild(nextZone);
+
+				if (!isTouch) {
+					sliderEl.addEventListener('mousemove', function () { Cursor.setState('more', 'Suivant'); });
+					sliderEl.addEventListener('mouseleave', function () { Cursor.setState(null); });
+				}
 			}
 
 			fragment.appendChild(sliderEl);
@@ -359,7 +404,7 @@
 
 		_galleryUpdateCounter: function () {
 			if (this._galleryCounter) {
-				this._galleryCounter.textContent = (this._galleryIndex + 1) + ' \u2014 ' + this.images.length;
+				this._galleryCounter.innerHTML = '<span class="current">' + (this._galleryIndex + 1) + '</span> \u2014 ' + this.images.length;
 			}
 		},
 

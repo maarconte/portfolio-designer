@@ -272,6 +272,11 @@ padding: 1rem 3rem;
 	will-change: transform;
 }
 
+.slider.is-edge-hover,
+.slider.is-edge-hover * {
+	cursor: pointer !important;
+}
+
 
 
 /* ─── Project Card ─────────────────────────────────────────────────────────── */
@@ -322,7 +327,7 @@ padding: 1rem 3rem;
 	height: calc(100vh - var(--header-height) - var(--tagline-height));
 	width: 18%;
 	z-index: 20;
-	cursor: pointer;
+	pointer-events: none; /* Allows horizontal scrolling to pass through to the slider */
 }
 
 .nav-zone--prev { left: 0; }
@@ -416,10 +421,6 @@ padding: 1rem 3rem;
 }
 
 /* Cursor states */
-.custom-cursor.state-arrow-left  .custom-cursor__arrow,
-.custom-cursor.state-arrow-right .custom-cursor__arrow {
-	display: block;
-}
 
 .custom-cursor.state-more .custom-cursor__text {
 	display: block;
@@ -563,7 +564,7 @@ padding: 1rem 3rem;
 	height: 100%;
 	width: 50%;
 	z-index: 5;
-	cursor: pointer;
+	cursor: none;
 }
 
 .drawer__gallery-nav--prev { left: 0; }
@@ -574,10 +575,13 @@ padding: 1rem 3rem;
 	margin-top:3rem;
 	font-size: 1rem;
 	letter-spacing: 0.14em;
-	color: var(--color-black);
+	color: var(--color-mid);
 	text-align: left;
 	padding: 0 1rem ;
 	text-align: center;
+	.current{
+		color: var(--color-black);
+	}
 }
 
 /* ─── Single Project Page ─────────────────────────────────────────────────────── */
