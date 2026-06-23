@@ -44,12 +44,8 @@
 			this.el.classList.add('is-visible', 'state-' + state);
 
 			var textEl = this.el.querySelector('.custom-cursor__text');
-			if (textEl) {
-				if (text) {
-					textEl.textContent = text;
-				} else if (state === 'more') {
-					textEl.textContent = 'Voir';
-				}
+			if (textEl && text) {
+				textEl.textContent = text;
 			}
 
 			if (this.arrowEl) {
@@ -145,11 +141,7 @@
 						Cursor.setState('next');
 					} else {
 						self.el.classList.remove('is-edge-hover');
-						if (e.target.closest('.project-card__image')) {
-							Cursor.setState('more');
-						} else {
-							Cursor.setState(null);
-						}
+						Cursor.setState(null);
 					}
 				});
 

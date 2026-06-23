@@ -143,7 +143,7 @@ p {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: var(--header-height);
+	height: fit-content;
 	z-index: 100;
 	display: flex;
 	align-items: center;
@@ -160,13 +160,14 @@ p {
 	gap: 1.5rem;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 3rem;
+	padding:  1rem;
 	pointer-events: auto;
 }
 
 /* mix-blend-mode: difference inverts against background — text appears white on dark, black on light */
 .site-title {
 bottom: 0;
+line-height: 1;
 }
 
 .site-title:hover {
@@ -193,6 +194,9 @@ bottom: 0;
 	list-style: none;
 	display: flex;
 	gap: 2.5rem;
+	li {
+		line-height: 1;
+	}
 }
 
 .site-nav .nav-menu a {
@@ -203,6 +207,7 @@ bottom: 0;
 	text-transform: uppercase;
 	color: var(--color-black);
 	transition: opacity 0.2s;
+
 }
 
 .site-nav .nav-menu a:hover {
@@ -281,7 +286,7 @@ padding: 1rem 3rem;
 .project-card {
 	flex: 0 0 auto;
 	/* padding: var(--card-padding-v) 0; */
-	cursor: none;
+	cursor: pointer;
 	scroll-snap-align: center;
 
 }
@@ -289,7 +294,7 @@ padding: 1rem 3rem;
 .project-card__image {
 	overflow: hidden;
 	position: relative;
-	cursor: none;
+	cursor: pointer;
 }
 
 .project-card__image img {
@@ -311,9 +316,9 @@ padding: 1rem 3rem;
 
 .project-card__info {
 	flex: 0 0 auto;
-	padding: 0 3rem;
+	padding: 0 1rem;
 	position: absolute;
-	bottom: 3rem;
+	bottom: 1rem;
 	left: 0;
 
 }
@@ -332,7 +337,7 @@ padding: 1rem 3rem;
 .nav-zone--prev { left: 0; }
 .nav-zone--next { right: 0; }
 
-/* Cards sit above nav zones so the "More" cursor state fires on cards */
+/* Cards sit above nav zones so the pointer cursor fires on cards */
 .project-card {
 	position: relative;
 	z-index: 25;
@@ -389,12 +394,6 @@ padding: 1rem 3rem;
 	color: var(--color-white);
 	background: var(--color-black);
 	padding: 0 0.35rem;
-}
-
-/* Cursor states */
-
-.custom-cursor.state-more .custom-cursor__text {
-	display: block;
 }
 
 .custom-cursor.state-prev .custom-cursor__arrow,

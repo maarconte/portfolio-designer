@@ -127,7 +127,7 @@ get_header();
 <!-- Custom cursor element -->
 <div class="custom-cursor" id="custom-cursor" aria-hidden="true">
 	<span class="custom-cursor__arrow" id="cursor-arrow"></span>
-	<span class="custom-cursor__text text-title">Voir</span>
+	<span class="custom-cursor__text text-title"></span>
 </div>
 
 <?php get_footer(); ?>
