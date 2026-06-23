@@ -12,7 +12,6 @@
 	--color-line:  #e0e0e0;
 
 	--header-height: 64px;
-	--tagline-height: 5rem;
 	--card-gap: 4vw;
 	--card-padding-v: 5vh;
 	--modal-z: 500;
@@ -223,7 +222,6 @@ padding: 1rem 3rem;
 
 .site-main--home {
 	height: 100vh;
-	padding-top: var(--header-height);
 	overflow: hidden;
 	position: relative;
 	@media (max-width: 1024px) {
@@ -274,7 +272,7 @@ padding: 1rem 3rem;
 
 .slider.is-edge-hover,
 .slider.is-edge-hover * {
-	cursor: pointer !important;
+	cursor: none !important;
 }
 
 
@@ -297,11 +295,10 @@ padding: 1rem 3rem;
 }
 
 .project-card__image img {
-	/* Natural dimensions — height is constrained to the available viewport height */
+	/* Natural dimensions — height fills the full viewport now that the tagline is gone */
 	width: auto;
-	height: auto;
-	max-height: calc(100vh - var(--tagline-height) - var(--card-padding-v) * 2 - 4rem);
-	/* max-width: 70vw; */
+	height: 100vh;
+	max-height: 100vh;
 	display: block;
 	transform: scale(1);
 	transition: transform 0.7s var(--ease-slide);
@@ -324,7 +321,7 @@ padding: 1rem 3rem;
 .nav-zone {
 	position: fixed;
 	top: var(--header-height);
-	height: calc(100vh - var(--header-height) - var(--tagline-height));
+	height: calc(100vh - var(--header-height));
 	width: 18%;
 	z-index: 20;
 	pointer-events: none; /* Allows horizontal scrolling to pass through to the slider */
@@ -337,37 +334,6 @@ padding: 1rem 3rem;
 .project-card {
 	position: relative;
 	z-index: 25;
-}
-
-/* Tagline */
-.slider__tagline {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	padding: 1rem;
-	font-family: var(--font-body);
-	font-weight: 300;
-	font-style: italic;
-	font-size: 1rem;
-	letter-spacing: 0.02em;
-	line-height: 1;
-	color: var(--color-black);
-	pointer-events: none;
-	text-align: center;
-
-	@media (min-width: 768px) {
-		font-size: 1.25rem;
-		text-align: right;
-		margin-left: auto;
-	}
-	@media (min-width: 1024px) {
-		max-width: calc(90vw - 3rem);
-	}
-
-	@media (min-width: 1280px) {
-		max-width: calc(60vw - 3rem);
-	}
-
 }
 
 /* No-projects fallback */
@@ -404,6 +370,9 @@ padding: 1rem 3rem;
 
 .custom-cursor__arrow {
 	display: none;
+	font-size: 2.5rem;
+	line-height: 1;
+	color: var(--color-black);
 }
 
 .custom-cursor__arrow img {
@@ -423,6 +392,11 @@ padding: 1rem 3rem;
 /* Cursor states */
 
 .custom-cursor.state-more .custom-cursor__text {
+	display: block;
+}
+
+.custom-cursor.state-prev .custom-cursor__arrow,
+.custom-cursor.state-next .custom-cursor__arrow {
 	display: block;
 }
 
@@ -816,9 +790,9 @@ padding: 1rem 3rem;
 	}
 
 	.project-card__image img {
-		width: auto;
-		height: 60vh;
-
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
 	}
 
 	/* On mobile show touch-friendly nav arrows at bottom of slider */
@@ -882,11 +856,11 @@ padding: 1rem 3rem;
 		--card-width: 88vw;
 	}
 
-		.project-card__image img {
-			width: 100vw;
-			height: 30vh;
-			object-fit: cover;
-		}
+	.project-card__image img {
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
+	}
 }
 
 /* ─── Reduce Motion ──────────────────────────────────────────────────────────── */

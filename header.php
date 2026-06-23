@@ -14,18 +14,18 @@
 	<header class="site-header" id="site-header" role="banner">
 		<div class="site-header__inner">
 
-			<div class="site-branding">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-title" rel="home">
+			<!-- <div class="site-branding">
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title" rel="home">
 					<?php
-					$random_logos = get_theme_mod( 'jeanne_random_logos_enabled', true ) ? jeanne_get_random_logos() : array();
-					if ( ! empty( $random_logos ) ) :
-						$logos_json = wp_json_encode( $random_logos );
+					$random_logos = get_theme_mod('jeanne_random_logos_enabled', true) ? jeanne_get_random_logos() : array();
+					if (! empty($random_logos)) :
+						$logos_json = wp_json_encode($random_logos);
 					?>
-						<div class="random-logo-wrap" data-logos="<?php echo esc_attr( $logos_json ); ?>">
+						<div class="random-logo-wrap" data-logos="<?php echo esc_attr($logos_json); ?>">
 							<img
 								class="custom-logo random-logo"
 								src=""
-								alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
+								alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
 								width="200"
 								height="60"
 							>
@@ -40,12 +40,12 @@
 							}
 						})();
 						</script>
-					<?php elseif ( has_custom_logo() ) : ?>
+					<?php elseif (has_custom_logo()) : ?>
 						<?php the_custom_logo(); ?>
 					<?php endif; ?>
 				</a>
 
-			</div>
+			</div> -->
 
 			<a href="<?php echo esc_url(home_url('/')); ?>" class="site-title text-title" rel="home">
 				<?php bloginfo('name'); ?>

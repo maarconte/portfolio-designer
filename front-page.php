@@ -90,10 +90,6 @@ get_header();
 		</div>
 
 	<?php endif; ?>
-	<?php $tagline = get_bloginfo('description');
-	if ($tagline) : ?>
-		<p class="slider__tagline"><?php echo esc_html($tagline); ?></p>
-	<?php endif; ?>
 </main>
 
 <!-- Project Drawer -->

@@ -51,6 +51,16 @@
 					textEl.textContent = 'Voir';
 				}
 			}
+
+			if (this.arrowEl) {
+				if (state === 'prev') {
+					this.arrowEl.textContent = '‹';
+				} else if (state === 'next') {
+					this.arrowEl.textContent = '›';
+				} else {
+					this.arrowEl.textContent = '';
+				}
+			}
 		}
 	};
 
@@ -129,10 +139,10 @@
 
 					if (x < rect.width * 0.05) {
 						self.el.classList.add('is-edge-hover');
-						Cursor.setState(null);
+						Cursor.setState('prev');
 					} else if (x > rect.width * 0.95) {
 						self.el.classList.add('is-edge-hover');
-						Cursor.setState(null);
+						Cursor.setState('next');
 					} else {
 						self.el.classList.remove('is-edge-hover');
 						if (e.target.closest('.project-card__image')) {
@@ -366,7 +376,11 @@
 				sliderEl.appendChild(nextZone);
 
 				if (!isTouch) {
-					sliderEl.addEventListener('mousemove', function () { Cursor.setState('more', 'Suivant'); });
+					sliderEl.addEventListener('mousemove', function (e) {
+						var rect = sliderEl.getBoundingClientRect();
+						var x    = e.clientX - rect.left;
+						Cursor.setState(x < rect.width / 2 ? 'prev' : 'next');
+					});
 					sliderEl.addEventListener('mouseleave', function () { Cursor.setState(null); });
 				}
 			}
