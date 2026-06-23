@@ -283,9 +283,7 @@ padding: 1rem 3rem;
 	/* padding: var(--card-padding-v) 0; */
 	cursor: none;
 	scroll-snap-align: center;
-	&:first-child .project-card__info{
-		padding-left: 3rem;
-	}
+
 }
 
 .project-card__image {
@@ -313,7 +311,11 @@ padding: 1rem 3rem;
 
 .project-card__info {
 	flex: 0 0 auto;
-	padding: 1rem;
+	padding: 0 3rem;
+	position: absolute;
+	bottom: 3rem;
+	left: 0;
+
 }
 
 
