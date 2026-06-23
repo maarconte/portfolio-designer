@@ -26,7 +26,7 @@ function jeanne_enqueue_assets() {
 		'jeanne-main',
 		JEANNE_URI . '/assets/css/main.css',
 		array(),
-		JEANNE_VERSION
+		filemtime( JEANNE_DIR . '/assets/css/main.css' )
 	);
 
 	// Main JS (slider + modal + cursor)
@@ -34,7 +34,7 @@ function jeanne_enqueue_assets() {
 		'jeanne-main',
 		JEANNE_URI . '/assets/js/main.js',
 		array(),
-		JEANNE_VERSION,
+		filemtime( JEANNE_DIR . '/assets/js/main.js' ),
 		true
 	);
 
