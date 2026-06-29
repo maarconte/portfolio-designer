@@ -248,31 +248,15 @@ padding: 1rem 1rem;
 	position: relative;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
+	scrollbar-width: none;       /* Firefox */
 	@media (max-width: 1024px) {
 		flex: 1;
 	}
 }
 
-/* Custom Scrollbar for Webkit (Chrome, Safari, Edge) */
-/* Styling the scrollbar forces it to be visible on macOS and mobile */
+/* Hide scrollbar on Webkit (Chrome, Safari, Edge) */
 .slider::-webkit-scrollbar {
-	height: 6px;
-	display: block;
-}
-
-.slider::-webkit-scrollbar-track {
-	background: var(--color-light);
-	border-radius: 10px;
-}
-
-.slider::-webkit-scrollbar-thumb {
-	background-color: #ccc;
-	border-radius: 10px;
-	border: 1px solid var(--color-light);
-}
-
-.slider::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-mid);
+	display: none;
 }
 
 .slider__track {

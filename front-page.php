@@ -58,9 +58,7 @@ get_header();
 
 						<div class="project-card__info">
 							<h2 class="project-card__title text-title"><?php echo esc_html($project_data['title']); ?></h2>
-							<?php if ($project_data['category']) : ?>
-								<p class="project-card__meta text-meta"><?php echo esc_html($project_data['category']); ?></p>
-							<?php endif; ?>
+
 						</div>
 
 					</article>
