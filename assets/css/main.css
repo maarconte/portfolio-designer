@@ -127,6 +127,7 @@ p {
 		font-weight: 700;
 		color: var(--color-black);
 		transition: opacity 0.2s;
+		line-height: 1;
 }
 
 .text-body {}
@@ -175,6 +176,7 @@ p {
 .site-title {
 bottom: 0;
 line-height: 1;
+text-transform: lowercase;
 }
 
 .site-title:hover {

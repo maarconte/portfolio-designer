@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array The project data.
  */
 function jeanne_get_project_data( $post_id ) {
-	$title       = get_the_title( $post_id );
+	$title       = html_entity_decode( get_the_title( $post_id ), ENT_QUOTES, 'UTF-8' );
 	$content     = get_post( $post_id )->post_content;
 	$description = preg_replace( '/<p>(\s|&nbsp;)*<\/p>/', '', wp_kses_post( wpautop( $content ) ) );
 	$permalink   = get_permalink( $post_id );
