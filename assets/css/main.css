@@ -60,6 +60,7 @@ body {
 body.is-front-page {
 	overflow: hidden;
 	height: 100vh;
+	height: 100dvh;
 }
 
 body.modal-open {
@@ -225,6 +226,7 @@ text-transform: lowercase;
 /* ─── Front Page / Slider ────────────────────────────────────────────────────── */
 .site-main {
 	height: calc(100vh - var(--header-height) - 20px);
+	height: calc(100dvh - var(--header-height) - 20px);
 }
 
 .site-main .container {
@@ -235,6 +237,7 @@ padding: 1rem 1rem;
 
 .site-main--home {
 	height: 100vh;
+	height: 100dvh;
 	overflow: hidden;
 	position: relative;
 	@media (max-width: 1024px) {
@@ -293,7 +296,9 @@ padding: 1rem 1rem;
 	/* Natural dimensions — height fills the full viewport now that the tagline is gone */
 	width: auto;
 	height: 100vh;
+	height: 100dvh;
 	max-height: 100vh;
+	max-height: 100dvh;
 	display: block;
 	transform: scale(1);
 	transition: transform 0.7s var(--ease-slide);
@@ -321,6 +326,7 @@ padding: 1rem 1rem;
 	position: fixed;
 	top: var(--header-height);
 	height: calc(100vh - var(--header-height));
+	height: calc(100dvh - var(--header-height));
 	width: 18%;
 	z-index: 20;
 	pointer-events: none; /* Allows horizontal scrolling to pass through to the slider */
@@ -338,6 +344,7 @@ padding: 1rem 1rem;
 /* No-projects fallback */
 .no-projects {
 	height: 100vh;
+	height: 100dvh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -782,6 +789,7 @@ padding: 1rem 1rem;
 	.project-card__image img {
 		width: 100vw;
 		height: 100vh;
+		height: 100dvh;
 		object-fit: cover;
 	}
 
@@ -849,6 +857,7 @@ padding: 1rem 1rem;
 	.project-card__image img {
 		width: 100vw;
 		height: 100vh;
+		height: 100dvh;
 		object-fit: cover;
 	}
 }
